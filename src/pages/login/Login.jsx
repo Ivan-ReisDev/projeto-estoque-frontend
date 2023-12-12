@@ -7,7 +7,7 @@ import './style.css'
 
 const Login = () => {
 
-const {dataLogin, setDataLogin, handleSubmitLogin} = useContext(Context)
+const {dataLogin, setDataLogin, handleSubmitLogin, message} = useContext(Context)
 
 
 
@@ -38,6 +38,7 @@ const {dataLogin, setDataLogin, handleSubmitLogin} = useContext(Context)
              onChange={(e) => setDataLogin({...dataLogin, password:e.target.value})}/> 
             <input className='btn-login' type="submit" value='Login' />
           </form>
+            <p>{message ? message.error : ''}</p>
         </div>
   </div>
   )

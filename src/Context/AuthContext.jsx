@@ -33,6 +33,8 @@ const AuthContext = ({ children }) => {
             });
 
             const resJSON = await res.json()
+            setMessage(resJSON)
+            console.log(resJSON.error)
             console.log(resJSON)
             setMessage(resJSON)
             if(resJSON.token) {
@@ -40,7 +42,7 @@ const AuthContext = ({ children }) => {
                 navigate('/home')
             } else {
                 console.log('teste login')
-                localStorage.removeIten('token');
+                localStorage.removeItem('token');
                 navigate('/')
             }
 
@@ -59,7 +61,7 @@ const AuthContext = ({ children }) => {
     }, [setTokenUser, navigate]);
 
     const exit = () => {
-        localStorage.removeIten('token');
+        localStorage.removeItem('token');
         navigate('/');
     }
 
@@ -71,7 +73,8 @@ const AuthContext = ({ children }) => {
                 setDataLogin,
                 handleSubmitLogin,
                 tokenUser,
-                exit
+                exit,
+                message
             }}>
 
             {children}

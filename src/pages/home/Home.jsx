@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Context } from '../../Context/AuthContext'
 
 
 const Home = () => {
   const {exit} = useContext(Context)
-  return (
-    <div>Home
-      <button onClick={exit}>Logo-ut</button>
 
+
+  return (
+    <div>Home 
+      <button onClick={exit}>Logo-ut</button>
     </div>
   )
 }
