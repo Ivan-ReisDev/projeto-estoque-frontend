@@ -4,6 +4,7 @@ import  Home    from './pages/home/Home'
 import AllProducts from './pages/allProducts/AllProducts'
 import Navbar from './components/Navbar/Navbar'
 import Login from './pages/login/Login'
+import PanelUser from './pages/registerUser/PenelUser'
 import './App.css'
 import { Context } from './Context/AuthContext'
 
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={ tokenUser ? <Home /> : <Login />}/>
       <Route path='/home' element={ tokenUser && <Home/>}/>
       <Route path='/products' element={ tokenUser && <AllProducts/>}/>
+      <Route path='/paneluser' element={ tokenUser && <PanelUser />}/>
       <Route path='/*' element={ !tokenUser && <Login/>}/>
     </Routes>
   
