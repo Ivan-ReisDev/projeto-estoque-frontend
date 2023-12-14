@@ -1,4 +1,34 @@
-.table-Products {
-    color: black;
-
-}
+.service-details div {
+    margin: 20px;
+  }
+  
+  .service-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .service-details  th, td {
+    border: 1px solid #FFFFFF;  
+    text-align: left;
+    padding: 8px;
+    color: #000000;
+  }
+  
+  .service-details th {
+    background-color: #333333;
+    text-align: center;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+  }
+  
+  .service-details  tr td{
+    background-color: #000000;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .service-details {
+    margin-bottom: 20px;
+  }

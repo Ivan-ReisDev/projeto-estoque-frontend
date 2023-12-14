@@ -1,133 +1,118 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+const API = 'http://localhost:3000/api/';
 
 
-const API = 'http://localhost:3000/api/'
+const Context = createContext('');
 
-
-const Context = createContext('')
 
 const AuthContext = ({ children }) => {
 
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const dataUser = localStorage.getItem("dataUser");
-    // Dados de login
+    // Obtém dados do usuário do armazenamento local
+    const dataUser = localStorage.getItem('dataUser');
+
+    // Estado para dados de login
     const [dataLogin, setDataLogin] = useState({
         email: '',
         password: '',
     });
 
-    // Resposta das requisições
-    const [message, setMessage] = useState("");
-    const [tokenUser, setTokenUser] = useState("")
-    const [allProducts, setAllProducts] = useState()
-    const [profile, setProfile] = useState(dataUser || null)
+    // Estado para mensagens de resposta
+    const [message, setMessage] = useState('');
+    const [tokenUser, setTokenUser] = useState('');
+    const [allProducts, setAllProducts] = useState();
+    const [profile, setProfile] = useState(dataUser || null);
 
-
+    // Função para lidar com o envio do formulário de login
     const handleSubmitLogin = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         try {
             const res = await fetch(`${API}login`, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(dataLogin),
             });
 
-            const resJSON = await res.json()
-            setMessage(resJSON)
-            console.log(resJSON.error)
-            console.log(resJSON)
-            setMessage(resJSON)
-            if(resJSON.token) {
+            const resJSON = await res.json();
+            setMessage(resJSON);
+
+            if (resJSON.token) {
                 localStorage.setItem('token', resJSON.token);
-                navigate('/home')
+                navigate('/home');
             } else {
-                console.log('teste login')
                 localStorage.removeItem('token');
-                navigate('/')
+                navigate('/');
             }
-
-
         } catch (error) {
-            console.log('teste', error)
+            console.error('Erro no login', error);
         }
+    };
 
-    }
-
-    useEffect(() => {
-        const tokenAuth = localStorage.getItem('token')
-        if(tokenAuth) {
-            setTokenUser(tokenAuth)
-        }
-        
-    }, [setTokenUser, navigate]);
-
-
-
-    const exit = () => {
-        localStorage.removeItem('token');
-        navigate('/');
-    }
-
-    useEffect(() => {
-        const getProductsAll = async () => {
-            try {
-                const res = await fetch('http://localhost:3000/api/get/products', {
-                    method:'GET',
-                    headers:{
-                        Authorization: `Bearer ${tokenUser}`,
-                    },
-                
-                })
-
-                const data = await res.json();
-                
-                setAllProducts(data)
-                console.log(data)
-            } catch (error) {
-                setMessage(error)
-            }
-
-
-        } 
-        getProductsAll()
-
-    },[tokenUser])
-
-
+    // Efeito para obter o perfil do usuário
     useEffect(() => {
         const getProfile = async () => {
             try {
-                const res = await fetch('http://localhost:3000/api/profile', {
-                    method:'GET',
-                    headers:{
+                const res = await fetch(`${API}profile`, {
+                    method: 'GET',
+                    headers: {
                         Authorization: `Bearer ${tokenUser}`,
                     },
-                
-                })
+                });
 
                 const data = await res.json();
-                    localStorage.setItem('dataUser', JSON.stringify(data));
-                setProfile(data)
-                
+                localStorage.setItem('dataUser', JSON.stringify(data));
+                setProfile(data);
             } catch (error) {
-                setMessage(error)
+                setMessage(error);
             }
+        };
+        getProfile();
+    }, [tokenUser]);
+
+    // Efeito para verificar se há um token de autenticação no armazenamento local
+    useEffect(() => {
+        const tokenAuth = localStorage.getItem('token');
+        if (tokenAuth) {
+            setTokenUser(tokenAuth);
+        }
+    }, [setTokenUser, navigate]);
+
+    // Efeito para obter todos os produtos
+    useEffect(() => {
+        const getProductsAll = async () => {
+            try {
+                const res = await fetch(`${API}get/products`, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${tokenUser}`,
+                    },
+                });
+
+                const data = await res.json();
+                setAllProducts(data);
+            } catch (error) {
+                setMessage(error);
+            }
+        };
+        getProductsAll();
+    }, [tokenUser]);
+
+    // Função para realizar logout
+    const exit = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
 
 
-        } 
-        getProfile()
-
-    },[tokenUser])
-
-
-
+    // Função para formatar data do MongoDB
     function formatarData(dataDoMongoDB) {
         const dataObjeto = new Date(dataDoMongoDB);
         const dia = dataObjeto.getDate().toString().padStart(2, '0');
@@ -136,11 +121,11 @@ const AuthContext = ({ children }) => {
         return `${dia}/${mes}/${ano}`;
     }
 
-
+    // Fornecimento do contexto para os componentes filhos
     return (
         <Context.Provider
             value={{
-                dataLogin, 
+                dataLogin,
                 setDataLogin,
                 handleSubmitLogin,
                 tokenUser,
@@ -148,17 +133,18 @@ const AuthContext = ({ children }) => {
                 message,
                 allProducts,
                 formatarData,
-                profile
-            }}>
-
+                profile,
+            }}
+        >
             {children}
         </Context.Provider>
+    );
+};
 
-    )
-}
-
+// Propriedades esperadas pelo componente AuthContext
 AuthContext.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export  {AuthContext, Context }
+// Exporta o contexto e o provedor
+export { AuthContext, Context };
