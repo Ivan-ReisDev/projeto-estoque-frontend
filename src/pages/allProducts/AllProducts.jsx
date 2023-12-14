@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import  Modal from '../../components//Navbar/modal/Modal' 
+import  Modal from '../../components/modal/Modal' 
 import { Context } from '../../Context/AuthContext';
 import './style.css'
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import ReactModal from 'react-modal';
-import { Context } from '../../../Context/AuthContext';
+import { Context } from '../../Context/AuthContext';
 
 const Modal = ({ isOpen, onClose, reserve }) => {
 

@@ -13,6 +13,7 @@ const AuthContext = ({ children }) => {
 
     const navigate = useNavigate()
 
+    const dataUser = localStorage.getItem("dataUser");
     // Dados de login
     const [dataLogin, setDataLogin] = useState({
         email: '',
@@ -23,6 +24,7 @@ const AuthContext = ({ children }) => {
     const [message, setMessage] = useState("");
     const [tokenUser, setTokenUser] = useState("")
     const [allProducts, setAllProducts] = useState()
+    const [profile, setProfile] = useState(dataUser || null)
 
 
     const handleSubmitLogin = async (e) => {
@@ -99,6 +101,33 @@ const AuthContext = ({ children }) => {
     },[tokenUser])
 
 
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+                const res = await fetch('http://localhost:3000/api/profile', {
+                    method:'GET',
+                    headers:{
+                        Authorization: `Bearer ${tokenUser}`,
+                    },
+                
+                })
+
+                const data = await res.json();
+                    localStorage.setItem('dataUser', JSON.stringify(data));
+                setProfile(data)
+                
+            } catch (error) {
+                setMessage(error)
+            }
+
+
+        } 
+        getProfile()
+
+    },[tokenUser])
+
+
+
     function formatarData(dataDoMongoDB) {
         const dataObjeto = new Date(dataDoMongoDB);
         const dia = dataObjeto.getDate().toString().padStart(2, '0');
@@ -118,7 +147,8 @@ const AuthContext = ({ children }) => {
                 exit,
                 message,
                 allProducts,
-                formatarData
+                formatarData,
+                profile
             }}>
 
             {children}

@@ -1,33 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../../Context/AuthContext'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { FaMixer, FaBars } from "react-icons/fa";
+
 import Logo from '../../assets/logoFundo.jpg'
-
-
-import { FaBars, FaMixer, FaPhoneAlt  } from "react-icons/fa";
-import { FaHouse, FaUserTie, FaReact  } from "react-icons/fa6";
-import { IoMdSettings } from "react-icons/io";
-import './style.css'
+import './navbar.css'
+import { Context } from '../../Context/AuthContext';
 
 const Navbar = () => {
-    const { exit } = useContext(Context)
-    
+
     const [sidebar, setSidebar] = useState(false);
-    const eventSidebar = () => { 
-      setSidebar(!sidebar)
-        }
+    const { exit } = useContext(Context)
+
+    const eventSidebar = () => {
+        setSidebar(!sidebar)
+
+    }
 
     return (
-        <header>
-            <nav>
+        <header className='header'>
+
+            <nav className='Navbar'>
                 {sidebar ? (<button onClick={eventSidebar} className='btn-sidebar'><FaMixer /></button>) :
                     (<button onClick={eventSidebar} className='btn-sidebar'><FaBars /></button>)}
-                <ul className={sidebar ? "active" : ""} id='navBar'>
-                   <li>,<Link to={'/home'}>Home</Link></li>
-                   <li>,<Link to={'/products'}>Produtos</Link></li>
-                   <li>,<Link to={'/home'}>Home</Link></li>
+                <ul className={sidebar ? 'Navbar-ul' : 'Navbar-ul  active'}>
+                    <li><NavLink to={'/home'}>Home</NavLink></li>
+                    <li><NavLink to={'/products'}>Produtos</NavLink></li>
+                    <li><NavLink to={'/cadastro'}>Cadastrar</NavLink></li>
+                    <li><NavLink to={'/users'}>Usuários</NavLink></li>
+                    <li><button onClick={() => exit()}>Logout</button></li>
                 </ul>
             </nav>
+            <NavLink to={'/home'} className='logo'>
+                <img src={Logo} alt="logo carropeça" /><h1>Carro peça</h1>
+            </NavLink>
 
         </header>
     )

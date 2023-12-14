@@ -15,11 +15,10 @@ function App() {
     <>
     {tokenUser && <Navbar />}
     <Routes>
-      <Route path='/' element={<Login />}/>
+      <Route path='/' element={ tokenUser ? <Home /> : <Login />}/>
       <Route path='/home' element={ tokenUser && <Home/>}/>
       <Route path='/products' element={ tokenUser && <AllProducts/>}/>
       <Route path='/*' element={ !tokenUser && <Login/>}/>
-      <Route path='/*' element={ tokenUser && <Home/>}/>
     </Routes>
   
     </>
