@@ -81,6 +81,8 @@ p {
     padding: 5px;
     width: 100%;
     height: 40px;
-    
+}
 
+.inputEntry{
+  color: #000000;
 }
