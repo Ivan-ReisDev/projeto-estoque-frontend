@@ -1,6 +1,12 @@
 import { useContext, useState } from 'react'
 import Modal from '../../components/modal/Modal'
 import { Context } from '../../Context/AuthContext';
+import { FaEye, FaSearch  } from "react-icons/fa";
+import { IoSettings, IoTrashBin } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
+
+
+
 import './style.css'
 
 const AllProducts = () => {
@@ -16,6 +22,19 @@ const AllProducts = () => {
 
     return (
         <div className='service-details'>
+
+            <div className='seach'>
+                <div className='seach-input'>
+                    <input type="text" name="seach" id="seach"  placeholder='Pesquisar'/>
+                    <span><FaSearch  className='icon'/></span>
+                </div>
+                <select name="category" id="category">
+                    <option value="category1">Categoria</option>
+                    <option value="category1">Valor 1</option>
+                    <option value="category3" selected>Valor 2</option>
+                    <option value="category">Valor 3</option>
+                </select>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -40,9 +59,12 @@ const AllProducts = () => {
                                 <td>{product.category}</td>
                                 <td>{product.codeSKU}</td>
                                 <td>{product.stock}</td>
-                                <td>{product.price}</td>
+                                <td>R$ {product.price}</td>
                                 <td>{product.localization}</td>
-                                <td><button onClick={() => openModal(product)}>Ver Detalhes</button></td>
+                                <td className='btn'>
+                                    <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
+                                    <button className='btn-single' onClick={() => openModal(product)}><IoSettings /></button>
+                                    <button className='btn-single btn-single-delete' onClick={() => openModal(product)}><IoTrashBin /></button></td>
                             </tr>
                         ))}
                 </tbody>

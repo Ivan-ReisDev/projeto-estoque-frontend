@@ -17,9 +17,9 @@ function App() {
       {tokenUser && <Navbar />}
       <Routes>
         <Route path='/' element={tokenUser ? <Home /> : <Login />} />
-        <Route path='/home' element={tokenUser ? <Home /> : <Navigate to="/" />} />
-        <Route path='/products' element={tokenUser ? <AllProducts /> : <Navigate to="/" />} />
-        <Route path='/paneluser' element={tokenUser ? <PanelUser /> : <Navigate to="/" />} />
+        <Route path='/home' element={tokenUser && <Home /> } />
+        <Route path='/products' element={tokenUser && <AllProducts />} />
+        <Route path='/paneluser' element={tokenUser && <PanelUser /> } />
         <Route path='/*' element={!tokenUser && <Navigate to="/" />} />
       </Routes>
 
