@@ -46,7 +46,7 @@ const AllProducts = () => {
                         <th>Preço</th>
                         <th>Localização</th>
                         <th></th>
-                        {profile.userType === "Admin" && <th>Ações</th>}
+
                     </tr>
                 </thead>
                 <tbody>
@@ -63,8 +63,10 @@ const AllProducts = () => {
                                 <td>{product.localization}</td>
                                 <td className='btn'>
                                     <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
-                                    <button className='btn-single' onClick={() => openModal(product)}><IoSettings /></button>
-                                    <button className='btn-single btn-single-delete' onClick={() => openModal(product)}><IoTrashBin /></button></td>
+                                    {profile.userType === "Admin" && <button className='btn-single' onClick={() => openModal(product)}><IoSettings /></button>}
+                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => openModal(product)}><IoTrashBin /></button>}
+
+                                </td>
                             </tr>
                         ))}
                 </tbody>
