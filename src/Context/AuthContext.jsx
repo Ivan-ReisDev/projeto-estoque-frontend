@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -108,6 +108,7 @@ const AuthContext = ({ children }) => {
     // Função para realizar logout
     const exit = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('dataUser');
         navigate('/');
     };
 

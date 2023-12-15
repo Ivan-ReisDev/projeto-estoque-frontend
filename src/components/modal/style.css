@@ -1,11 +1,47 @@
+/* Altura e Largura */
 .ReactModal__Overlay--after-open {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 50%;
+    height: 90%;
+    margin: auto;
 }
 
-.ReactModal__Content{
-   width: 40vw;
+/*Fundo 1*/
+.ReactModal__Overlay--after-open {
+    background-color: transparent !important;
+}
 
+/*Fundo 2*/
+.ReactModal__Content {
+    width: 50%;
+    margin: auto;
+    background-color: #34495E !important;
+    position: absolute;
+}
+
+
+.container_modal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container_modal p {
+    color: #FFFFFF;
+}
+
+.container_modal button {
+    padding: 10px;
+    background-color: #000000;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: -80px;
+    transition: .500s ease-in;
+}
+
+.container_modal button:hover {
+    background-color: #ff0000;
+    transition: .500s ease-in-out;
 }

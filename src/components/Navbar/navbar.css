@@ -101,8 +101,12 @@
 
 .Navbar li span {
     margin-right: 10px;
-
 }
+
+.Navbar button{
+    cursor: pointer;
+}
+
 .icon {
     font-size: 22px;
 }

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import Modal from '../../components/modal/Modal'
 import { Context } from '../../Context/AuthContext';
-import { FaEye, FaSearch  } from "react-icons/fa";
+import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 
@@ -13,7 +13,7 @@ const AllProducts = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
-    const { allProducts, formatarData } = useContext(Context)
+    const { allProducts, formatarData, profile } = useContext(Context)
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -25,8 +25,8 @@ const AllProducts = () => {
 
             <div className='seach'>
                 <div className='seach-input'>
-                    <input type="text" name="seach" id="seach"  placeholder='Pesquisar'/>
-                    <span><FaSearch  className='icon'/></span>
+                    <input type="text" name="seach" id="seach" placeholder='Pesquisar' />
+                    <span><FaSearch className='icon' /></span>
                 </div>
                 <select name="category" id="category">
                     <option value="category1">Categoria</option>
@@ -46,7 +46,7 @@ const AllProducts = () => {
                         <th>Preço</th>
                         <th>Localização</th>
                         <th></th>
-                        {/* {profileUser.userType === "Admin" && <th>Ações</th>} */}
+                        {profile.userType === "Admin" && <th>Ações</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -69,18 +69,18 @@ const AllProducts = () => {
                         ))}
                 </tbody>
 
-                {selectedProducts && (
-                    <Modal
-                        isOpen={isModalOpen}
-                        onClose={() => {
-                            setSelectedProducts(null);
-                            setIsModalOpen(false);
-                        }}
-                        reserve={selectedProducts}
-                    />
-                )}
 
             </table>
+            {selectedProducts && (
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => {
+                        setSelectedProducts(null);
+                        setIsModalOpen(false);
+                    }}
+                    reserve={selectedProducts}
+                />
+            )}
         </div>
     )
 }
