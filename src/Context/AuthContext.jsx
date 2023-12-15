@@ -49,6 +49,8 @@ const AuthContext = ({ children }) => {
                 navigate('/home');
             } else {
                 localStorage.removeItem('token');
+                localStorage.removeItem('dataUser');
+
                 navigate('/');
             }
         } catch (error) {
@@ -82,6 +84,8 @@ const AuthContext = ({ children }) => {
         const tokenAuth = localStorage.getItem('token');
         if (tokenAuth) {
             setTokenUser(tokenAuth);
+        } else {
+            navigate('/')
         }
     }, [setTokenUser, navigate]);
 

@@ -16,7 +16,7 @@ function App() {
     <>
       {tokenUser && <Navbar />}
       <Routes>
-        <Route path='/' element={tokenUser ? <Home /> : <Login />} />
+        <Route path='/' element={!tokenUser ? <Login /> : <Navigate to="/home" />} />
         <Route path='/home' element={tokenUser ? <Home /> : <Navigate to="/" />} />
         <Route path='/products' element={tokenUser ? <AllProducts /> : <Navigate to="/" />} />
         <Route path='/paneluser' element={tokenUser ? <PanelUser /> : <Navigate to="/" />} />
