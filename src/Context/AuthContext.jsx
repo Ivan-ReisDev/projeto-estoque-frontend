@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import removeAccents from 'remove-accents';
+
 
 const API = 'http://localhost:3000/api/';
 
@@ -25,7 +27,7 @@ const AuthContext = ({ children }) => {
     // Estado para mensagens de resposta
     const [message, setMessage] = useState('');
     const [tokenUser, setTokenUser] = useState('');
-    const [allProducts, setAllProducts] = useState();
+    const [allProducts, setAllProducts] = useState([]);
     const [profile, setProfile] = useState(dataUser || null);
 
     // Função para lidar com o envio do formulário de login
@@ -44,19 +46,54 @@ const AuthContext = ({ children }) => {
             const resJSON = await res.json();
             setMessage(resJSON);
 
-            if (resJSON.token) {
+            if (res.ok) {
                 localStorage.setItem('token', resJSON.token);
                 navigate('/home');
             } else {
                 localStorage.removeItem('token');
                 localStorage.removeItem('dataUser');
-
                 navigate('/');
             }
         } catch (error) {
             console.error('Erro no login', error);
         }
     };
+
+    const handleDelete = async (id) => {
+        try {
+            const res = await fetch(`${API}remove/products/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const DataMSG = await res.json();
+
+            if (res.ok) {
+                window.location.reload();
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao excluir produto: ${DataMSG.msg}`);
+            }
+        } catch (error) {
+            console.error('Erro ao deletar produto', error);
+        }
+    };
+
+
+    function searchAllProducts(e) {
+        const value = e.target.value.toLowerCase();
+
+        const resultProduct = value ? allProducts.filter(filme => {
+            const termSearch = removeAccents(value.toLowerCase().replace(/\s+/g, '.*\\b'));
+            const nameProductRemoveACcent = removeAccents(filme.nameProducts.toLowerCase());
+            const regex = new RegExp(`\\b${termSearch}.*`, 'i');
+            return regex.test(nameProductRemoveACcent);
+        }) : [];
+
+        setAllProducts(resultProduct);
+    }
 
     // Efeito para obter o perfil do usuário
     useEffect(() => {
@@ -69,15 +106,23 @@ const AuthContext = ({ children }) => {
                     },
                 });
 
+                if (!res.ok) {
+                    throw new Error('Erro na requisição');
+                }
+
                 const data = await res.json();
                 localStorage.setItem('dataUser', JSON.stringify(data));
                 setProfile(data);
             } catch (error) {
-                setMessage(error);
+                setMessage(error.message || 'Erro desconhecido');
             }
         };
-        getProfile();
-    }, [tokenUser]);
+
+        if (tokenUser) {
+            getProfile();
+        }
+    }, [tokenUser, setProfile, setMessage]);
+
 
     // Efeito para verificar se há um token de autenticação no armazenamento local
     useEffect(() => {
@@ -114,6 +159,8 @@ const AuthContext = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('dataUser');
         navigate('/');
+        window.location.reload();
+
     };
 
 
@@ -133,12 +180,15 @@ const AuthContext = ({ children }) => {
                 dataLogin,
                 setDataLogin,
                 handleSubmitLogin,
+                handleDelete,
                 tokenUser,
                 exit,
                 message,
                 allProducts,
                 formatarData,
                 profile,
+                searchAllProducts
+
             }}
         >
             {children}

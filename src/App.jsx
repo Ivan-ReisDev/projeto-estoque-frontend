@@ -1,4 +1,4 @@
-import { Routes, Navigate, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { useContext } from 'react'
 import Home from './pages/home/Home'
 import AllProducts from './pages/allProducts/AllProducts'
@@ -16,11 +16,11 @@ function App() {
     <>
       {tokenUser && <Navbar />}
       <Routes>
-        <Route path='/' element={!tokenUser ? <Login /> : <Navigate to="/home" />} />
-        <Route path='/home' element={tokenUser ? <Home /> : <Navigate to="/" />} />
-        <Route path='/products' element={tokenUser ? <AllProducts /> : <Navigate to="/" />} />
-        <Route path='/paneluser' element={tokenUser ? <PanelUser /> : <Navigate to="/" />} />
-        <Route path='/*' element={!tokenUser && <Navigate to="/" />} />
+        <Route path='/' element={!tokenUser && <Login />} />
+        <Route path='/home' element={tokenUser && <Home />} />
+        <Route path='/products' element={tokenUser && <AllProducts />} />
+        <Route path='/paneluser' element={tokenUser && <PanelUser />} />
+        <Route path='/*' element={tokenUser ? <Home /> : <Login />} />
       </Routes>
 
     </>

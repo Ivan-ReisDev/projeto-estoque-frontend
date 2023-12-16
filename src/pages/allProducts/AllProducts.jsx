@@ -3,7 +3,7 @@ import Modal from '../../components/modal/Modal'
 import { Context } from '../../Context/AuthContext';
 import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
-import { CiSearch } from "react-icons/ci";
+// import { CiSearch } from "react-icons/ci";
 
 
 
@@ -13,7 +13,7 @@ const AllProducts = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
-    const { allProducts, formatarData, profile } = useContext(Context)
+    const { allProducts, formatarData, profile, handleDelete, message, searchAllProducts } = useContext(Context)
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -25,13 +25,13 @@ const AllProducts = () => {
 
             <div className='seach'>
                 <div className='seach-input'>
-                    <input type="text" name="seach" id="seach" placeholder='Pesquisar' />
+                    <input type="text" name="seach" id="seach" placeholder='Pesquisar' onChange={(e) => searchAllProducts(e)} />
                     <span><FaSearch className='icon' /></span>
                 </div>
                 <select name="category" id="category">
                     <option value="category1">Categoria</option>
                     <option value="category1">Valor 1</option>
-                    <option value="category3" selected>Valor 2</option>
+                    <option value="category3" >Valor 2</option>
                     <option value="category">Valor 3</option>
                 </select>
             </div>
@@ -46,7 +46,6 @@ const AllProducts = () => {
                         <th>Preço</th>
                         <th>Localização</th>
                         <th></th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -64,15 +63,14 @@ const AllProducts = () => {
                                 <td className='btn'>
                                     <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
                                     {profile.userType === "Admin" && <button className='btn-single' onClick={() => openModal(product)}><IoSettings /></button>}
-                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => openModal(product)}><IoTrashBin /></button>}
+                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}><IoTrashBin /></button>}
 
                                 </td>
                             </tr>
                         ))}
                 </tbody>
-
-
             </table>
+
             {selectedProducts && (
                 <Modal
                     isOpen={isModalOpen}
@@ -83,6 +81,7 @@ const AllProducts = () => {
                     reserve={selectedProducts}
                 />
             )}
+            {message ? alert(message) : []}
         </div>
     )
 }
