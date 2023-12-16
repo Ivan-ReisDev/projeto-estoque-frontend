@@ -81,7 +81,7 @@ const AllProducts = () => {
                     reserve={selectedProducts}
                 />
             )}
-            {message ? alert(message) : []}
+            {/* {message ? alert(message) : []} */}
         </div>
     )
 }
