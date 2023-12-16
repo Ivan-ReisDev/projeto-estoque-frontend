@@ -82,18 +82,44 @@ const AuthContext = ({ children }) => {
     };
 
 
+    // Função para obter todos os produtos
+    const getProductsAll = async () => {
+        try {
+            const res = await fetch(`${API}get/products`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenUser}`,
+                },
+            });
+
+            const data = await res.json();
+            setAllProducts(data);
+        } catch (error) {
+            setMessage(error);
+        }
+    };
+
     function searchAllProducts(e) {
-        const value = e.target.value.toLowerCase();
+        const value = e.target.value.trim().toLowerCase();
 
-        const resultProduct = value ? allProducts.filter(filme => {
-            const termSearch = removeAccents(value.toLowerCase().replace(/\s+/g, '.*\\b'));
-            const nameProductRemoveACcent = removeAccents(filme.nameProducts.toLowerCase());
-            const regex = new RegExp(`\\b${termSearch}.*`, 'i');
-            return regex.test(nameProductRemoveACcent);
-        }) : [];
+        if (value === '') {
+            // Se a string de pesquisa estiver vazia, recarregue todos os produtos da API
+            getProductsAll();
+        } else {
+            const resultProduct = allProducts.filter(filme => {
+                const termSearch = removeAccents(value.replace(/\s+/g, '.*\\b'));
+                const nameProductRemoveACcent = removeAccents(filme.nameProducts.toLowerCase());
+                const regex = new RegExp(`\\b${termSearch}.*`, 'i');
+                return regex.test(nameProductRemoveACcent);
+            });
 
-        setAllProducts(resultProduct);
+            setAllProducts(resultProduct);
+        }
     }
+    
+    useEffect(() => {
+        getProductsAll();
+    }, [tokenUser]);
 
     // Efeito para obter o perfil do usuário
     useEffect(() => {
@@ -134,25 +160,6 @@ const AuthContext = ({ children }) => {
         }
     }, [setTokenUser, navigate]);
 
-    // Efeito para obter todos os produtos
-    useEffect(() => {
-        const getProductsAll = async () => {
-            try {
-                const res = await fetch(`${API}get/products`, {
-                    method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${tokenUser}`,
-                    },
-                });
-
-                const data = await res.json();
-                setAllProducts(data);
-            } catch (error) {
-                setMessage(error);
-            }
-        };
-        getProductsAll();
-    }, [tokenUser]);
 
     // Função para realizar logout
     const exit = () => {
