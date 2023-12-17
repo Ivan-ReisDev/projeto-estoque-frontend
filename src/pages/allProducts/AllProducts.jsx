@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import Modal from '../../components/modal/Modal'
-import { Context } from '../../Context/AuthContext';
+import { UserContext } from '../../Context/UserContext';
 import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 // import { CiSearch } from "react-icons/ci";
@@ -13,7 +13,7 @@ const AllProducts = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
-    const { allProducts, formatarData, profile, handleDelete, message, searchAllProducts } = useContext(Context)
+    const { allProducts, formatarData, profile, handleDelete, message, searchAllProducts } = useContext(UserContext)
 
     const openModal = (data) => {
         setSelectedProducts(data);

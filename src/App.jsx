@@ -6,11 +6,12 @@ import Navbar from './components/Navbar/Navbar'
 import Login from './pages/login/Login'
 import PanelUser from './pages/registerUser/PenelUser'
 import './App.css'
-import { Context } from './Context/AuthContext'
+import { UserContext } from './Context/UserContext'
+import RegisterProducts from './pages/registerProducts/RegisterProducts'
 
 
 function App() {
-  const { tokenUser } = useContext(Context)
+  const { tokenUser } = useContext(UserContext)
 
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={!tokenUser && <Login />} />
         <Route path='/home' element={tokenUser && <Home />} />
         <Route path='/products' element={tokenUser && <AllProducts />} />
+        <Route path='/products/register' element={tokenUser && <RegisterProducts />} />
         <Route path='/paneluser' element={tokenUser && <PanelUser />} />
         <Route path='/*' element={tokenUser ? <Home /> : <Login />} />
       </Routes>

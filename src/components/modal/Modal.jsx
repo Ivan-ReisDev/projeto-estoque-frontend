@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 import ReactModal from 'react-modal';
-import { Context } from '../../Context/AuthContext';
+import { UserContext } from '../../Context/UserContext';
 import './style.css'
 
+// eslint-disable-next-line react/prop-types
 const Modal = ({ isOpen, onClose, reserve }) => {
 
 
-    const { formatarData } = useContext(Context)
+    const { formatarData } = useContext(UserContext)
 
     return (
         <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto">
@@ -16,9 +17,10 @@ const Modal = ({ isOpen, onClose, reserve }) => {
                     <div>
                         <p>Criação: {formatarData(reserve.createdAt)}</p>
                         <p>Atualização: {formatarData(reserve.updatedAt)}</p>
-                        <p>Nome: {reserve.nameProducts}</p>
+                        <p>Usuario: {reserve.nameUser}</p>
+                        <p>Produto: {reserve.nameProducts}</p>
                         <p>Descrição: {reserve.description}</p>
-                        <p>Usuário: {reserve.category}</p>
+                        <p>Categoria: {reserve.category}</p>
                         <p>SKU: {reserve.codeSKU}</p>
                         <p>Marca: {reserve.mark}</p>
                         <p>Estoque: {reserve.stock}</p>

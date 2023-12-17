@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import removeAccents from 'remove-accents';
 
-
 const API = 'http://localhost:3000/api/';
+const PRD = 'https://backend-carropeca.vercel.app/api/'
 
-
-const Context = createContext('');
-
+const UserContext = createContext('');
 
 const AuthContext = ({ children }) => {
-
-
     const navigate = useNavigate();
 
     // Obtém dados do usuário do armazenamento local
@@ -27,6 +23,7 @@ const AuthContext = ({ children }) => {
     // Estado para mensagens de resposta
     const [message, setMessage] = useState('');
     const [tokenUser, setTokenUser] = useState('');
+
     const [allProducts, setAllProducts] = useState([]);
     const [profile, setProfile] = useState(dataUser || null);
 
@@ -35,7 +32,7 @@ const AuthContext = ({ children }) => {
         e.preventDefault();
 
         try {
-            const res = await fetch(`${API}login`, {
+            const res = await fetch(`${PRD}login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,9 +56,10 @@ const AuthContext = ({ children }) => {
         }
     };
 
+    // Função para excluir um produto
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`${API}remove/products/${id}`, {
+            const res = await fetch(`${PRD}remove/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,11 +79,10 @@ const AuthContext = ({ children }) => {
         }
     };
 
-
     // Função para obter todos os produtos
     const getProductsAll = async () => {
         try {
-            const res = await fetch(`${API}get/products`, {
+            const res = await fetch(`${PRD}get/products`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${tokenUser}`,
@@ -99,6 +96,7 @@ const AuthContext = ({ children }) => {
         }
     };
 
+    // Função para buscar todos os produtos
     function searchAllProducts(e) {
         const value = e.target.value.trim().toLowerCase();
 
@@ -106,9 +104,11 @@ const AuthContext = ({ children }) => {
             // Se a string de pesquisa estiver vazia, recarregue todos os produtos da API
             getProductsAll();
         } else {
-            const resultProduct = allProducts.filter(filme => {
+            const resultProduct = allProducts.filter((filme) => {
                 const termSearch = removeAccents(value.replace(/\s+/g, '.*\\b'));
-                const nameProductRemoveACcent = removeAccents(filme.nameProducts.toLowerCase());
+                const nameProductRemoveACcent = removeAccents(
+                    filme.nameProducts.toLowerCase()
+                );
                 const regex = new RegExp(`\\b${termSearch}.*`, 'i');
                 return regex.test(nameProductRemoveACcent);
             });
@@ -116,7 +116,8 @@ const AuthContext = ({ children }) => {
             setAllProducts(resultProduct);
         }
     }
-    
+
+    // Efeito para obter todos os produtos ao carregar a página
     useEffect(() => {
         getProductsAll();
     }, [tokenUser]);
@@ -125,7 +126,7 @@ const AuthContext = ({ children }) => {
     useEffect(() => {
         const getProfile = async () => {
             try {
-                const res = await fetch(`${API}profile`, {
+                const res = await fetch(`${PRD}profile`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${tokenUser}`,
@@ -135,8 +136,8 @@ const AuthContext = ({ children }) => {
                 if (!res.ok) {
                     throw new Error('Erro na requisição');
                 }
-
                 const data = await res.json();
+
                 localStorage.setItem('dataUser', JSON.stringify(data));
                 setProfile(data);
             } catch (error) {
@@ -149,17 +150,15 @@ const AuthContext = ({ children }) => {
         }
     }, [tokenUser, setProfile, setMessage]);
 
-
     // Efeito para verificar se há um token de autenticação no armazenamento local
     useEffect(() => {
         const tokenAuth = localStorage.getItem('token');
         if (tokenAuth) {
             setTokenUser(tokenAuth);
         } else {
-            navigate('/')
+            navigate('/');
         }
     }, [setTokenUser, navigate]);
-
 
     // Função para realizar logout
     const exit = () => {
@@ -167,9 +166,7 @@ const AuthContext = ({ children }) => {
         localStorage.removeItem('dataUser');
         navigate('/');
         window.location.reload();
-
     };
-
 
     // Função para formatar data do MongoDB
     function formatarData(dataDoMongoDB) {
@@ -180,9 +177,10 @@ const AuthContext = ({ children }) => {
         return `${dia}/${mes}/${ano}`;
     }
 
+
     // Fornecimento do contexto para os componentes filhos
     return (
-        <Context.Provider
+        <UserContext.Provider
             value={{
                 dataLogin,
                 setDataLogin,
@@ -194,12 +192,11 @@ const AuthContext = ({ children }) => {
                 allProducts,
                 formatarData,
                 profile,
-                searchAllProducts
-
+                searchAllProducts,
             }}
         >
             {children}
-        </Context.Provider>
+        </UserContext.Provider>
     );
 };
 
@@ -209,4 +206,4 @@ AuthContext.propTypes = {
 };
 
 // Exporta o contexto e o provedor
-export { AuthContext, Context };
+export { AuthContext, UserContext };

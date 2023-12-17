@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Context } from '../../Context/AuthContext'
+import { UserContext } from '../../Context/UserContext.jsx'
 import InventarioImg from '../../assets/Checking boxes-amico.png'
 import CadastroProdut from '../../assets/cadastro.png'
 import UsersImg from '../../assets/users.png'
@@ -11,7 +10,7 @@ import './Home.css'
 
 const Home = () => {
 
-  const { profile } = useContext(Context);
+  const { profile } = useContext(UserContext);
 
   return (
 
@@ -29,7 +28,7 @@ const Home = () => {
           </div>
 
           <div className='service'>
-            <Link to={'/products'} >
+            <Link to={'/products/register'} >
               <img src={CadastroProdut} alt="" />
               Cadastrar Produto
             </Link>
