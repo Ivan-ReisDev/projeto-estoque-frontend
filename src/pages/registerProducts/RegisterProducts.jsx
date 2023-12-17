@@ -13,7 +13,8 @@ const RegisterProducts = () => {
 
 
   return (
-    <div className='register'>
+
+    <div className='container_registerProduct'>
       <form onSubmit={handleSubmitProducts}>
 
         <label htmlFor="nameProducts">Produto *</label>
@@ -43,7 +44,7 @@ const RegisterProducts = () => {
         <label htmlFor="localization">Localização *</label>
         <input type="text" name="localization" id="localization" value={formData.localization} onChange={handleChange} required />
 
-        <button type="submit">Registrar Produto</button>
+        <button type="submit">Registrar</button>
       </form>
     </div>
   );

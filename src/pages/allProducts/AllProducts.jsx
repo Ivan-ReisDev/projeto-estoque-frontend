@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import Modal from '../../components/modal/Modal'
+import { ContextProducts } from '../../Context/ProductsContext';
 import { UserContext } from '../../Context/UserContext';
 import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
@@ -13,7 +14,9 @@ const AllProducts = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
-    const { allProducts, formatarData, profile, handleDelete, message, searchAllProducts } = useContext(UserContext)
+
+    const { allProducts, searchAllProducts } = useContext(ContextProducts);
+    const { formatarData, profile, handleDelete } = useContext(UserContext);
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -81,7 +84,6 @@ const AllProducts = () => {
                     reserve={selectedProducts}
                 />
             )}
-            {/* {message ? alert(message) : []} */}
         </div>
     )
 }

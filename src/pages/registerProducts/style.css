@@ -1,5 +1,39 @@
-.register {
-    background-color: antiquewhite;
-    width: 100vw;
-    height: 90vh;
+.container_registerProduct {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background-color: #353535;
+    height: 93%;
+}
+
+.container_registerProduct form input{
+    padding: 10px;
+    width: 150%;
+    border-radius: 5%;
+    border: 1px solid #FFFFFF;
+    display: flex;   
+}
+
+.container_registerProduct label{
+    color: #FFFFFF;
+    font-weight:  bold;
+}
+
+.container_registerProduct button{
+    background-color: #FFFFFF;
+    margin-top: 5%;
+    color: black;
+    padding: 10px;   
+    cursor: pointer;
+    border: none;
+    transition: .300s ease-in;
+    border: 1px solid transparent;
+
+}
+
+.container_registerProduct button:hover{
+    background-color: #353535;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    transition: .300s ease-in-out;
 }
