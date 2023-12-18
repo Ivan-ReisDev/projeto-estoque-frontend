@@ -6,11 +6,18 @@ import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 // import { CiSearch } from "react-icons/ci";
 
-
+const maxItens = 20;
+const maxLeft = (maxItens - 1) / 2;
 
 import './style.css'
 
-const AllProducts = () => {
+const AllProducts = ({limit, total, offset}) => {
+
+    const current = (offset /limit) + 1;
+    const pages =  Math.ceil(total / limit);
+    const first = Math.max(current - maxLeft, 1);
+
+    
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);

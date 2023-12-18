@@ -26,14 +26,14 @@ const RegisterProducts = () => {
         <label htmlFor="category">Categoria *</label>
         <input type="text" name="category" id="category" value={formData.category} onChange={handleChange} required />
 
-        <label htmlFor="link">Link *</label>
-        <input type="url" name="link" id="link" value={formData.link} onChange={handleChange} required />
+        <label htmlFor="link">Link </label>
+        <input type="url" name="link" id="link" value={formData.link} onChange={handleChange}  />
 
         <label htmlFor="codeSKU">Código SKU *</label>
         <input type="text" name="codeSKU" id="codeSKU" value={formData.codeSKU} onChange={handleChange} required />
 
-        <label htmlFor="mark">Marca *</label>
-        <input type="text" name="mark" id="mark" value={formData.mark} onChange={handleChange} required />
+        <label htmlFor="mark">Marca</label>
+        <input type="text" name="mark" id="mark" value={formData.mark} onChange={handleChange}  />
 
         <label htmlFor="stock">Estoque *</label>
         <input type="number" name="stock" id="stock" value={formData.stock} onChange={handleChange} required />
