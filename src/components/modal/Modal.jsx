@@ -22,6 +22,7 @@ const Modal = ({ isOpen, onClose, reserve }) => {
                         <p>Descrição: {reserve.description}</p>
                         <p>Categoria: {reserve.category}</p>
                         <p>SKU: {reserve.codeSKU}</p>
+                        <p>Link: <a href={reserve.link}>{reserve.link}</a></p>
                         <p>Marca: {reserve.mark}</p>
                         <p>Estoque: {reserve.stock}</p>
                         <p>Preço: {reserve.price}</p>

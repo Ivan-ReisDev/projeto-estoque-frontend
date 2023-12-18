@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react';
 import { useContext } from 'react'
 import Home from './pages/home/Home'
 import AllProducts from './pages/allProducts/AllProducts'
@@ -24,7 +25,7 @@ function App() {
         <Route path='/paneluser' element={tokenUser && <PanelUser />} />
         <Route path='/*' element={tokenUser ? <Home /> : <Login />} />
       </Routes>
-
+      <Analytics />
     </>
   )
 }

@@ -46,6 +46,7 @@ const RegisterProducts = () => {
 
         <button type="submit">Registrar</button>
       </form>
+    
     </div>
   );
 };

@@ -46,7 +46,7 @@ const ProductsContext = ({ children }) => {
             });
 
             const DataMSG = await res.json();
-            console.log('teste', DataMSG);
+            console.log('teste', setMessage(DataMSG));
         } catch (error) {
             console.error('Erro ao criar produto', error);
         }
@@ -149,7 +149,8 @@ const ProductsContext = ({ children }) => {
                 handleSubmitProducts,
                 message,
                 searchAllProducts,
-                allProduct
+                allProduct,
+                
             }}
         >
             {children}
