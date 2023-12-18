@@ -1,20 +1,20 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import removeAccents from 'remove-accents';
+import { UserContext } from './UserContext';
 
 
-// const API = 'http://localhost:3000/api/';
+const API = 'http://localhost:3000/api/';
 const PRD = 'https://backend-carropeca.vercel.app/api/'
 
 const ContextProducts = createContext('');
 
 const ProductsContext = ({ children }) => {
 
-    // Obtém dados do usuário do armazenamento local
-    const dataUser = localStorage.getItem('dataUser');
-    const tokenAuth = localStorage.getItem('token');
+    const { profile, tokenUser } = useContext(UserContext);
+
     // Reservar os produtos
-    const [allProducts, setAllProducts] = useState([]);
+    const [allProduct, setAllProduct] = useState([]);
     const [message, setMessage] = useState('');
     // Estado para dados do formulário de produtos
     const [formData, setFormData] = useState({
@@ -40,13 +40,13 @@ const ProductsContext = ({ children }) => {
                 },
                 body: JSON.stringify({
                     formData: formData,
-                    idUser: dataUser._id,
-                    nameUser: dataUser.user,
+                    idUser: profile._id,
+                    nameUser: profile.user,
                 }),
             });
 
             const DataMSG = await res.json();
-            console.log(DataMSG);
+            console.log('teste', DataMSG);
         } catch (error) {
             console.error('Erro ao criar produto', error);
         }
@@ -72,16 +72,47 @@ const ProductsContext = ({ children }) => {
             const res = await fetch(`${PRD}get/products`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${tokenAuth}`,
+                    Authorization: `Bearer ${tokenUser}`,
                 },
             });
-
             const data = await res.json();
-            setAllProducts(data);
+            return data
         } catch (error) {
             setMessage(error);
         }
     };
+
+
+    const fetchDataAndSetData = useCallback(async () => {
+        try {
+            const result = await getProductsAll();
+
+            if (result) {
+                localStorage.setItem('produtos', JSON.stringify(result));
+            }
+
+        } catch (error) {
+            console.log("Ocorreu um erro, tente novamente mais tarde");
+        }
+    }, []);
+
+
+    useEffect(() => {
+        // Check if cached data exists
+        const cachedData = localStorage.getItem(('produtos'));
+        if (cachedData) {
+            setAllProduct(JSON.parse(cachedData));            
+        }
+
+        // Fetch new data
+        fetchDataAndSetData();
+
+        const refreshInterval = setInterval(fetchDataAndSetData, 1 * 60 * 1000);
+
+        return () => {
+            clearInterval(refreshInterval);
+        };
+    }, [fetchDataAndSetData]);
 
     // Função para barra de pesquisa dos produtos
     function searchAllProducts(e) {
@@ -91,7 +122,7 @@ const ProductsContext = ({ children }) => {
             // Se a string de pesquisa estiver vazia, recarregue todos os produtos da API
             getProductsAll();
         } else {
-            const resultProduct = allProducts.filter((filme) => {
+            const resultProduct = allProduct.filter((filme) => {
                 const termSearch = removeAccents(value.replace(/\s+/g, '.*\\b'));
                 const nameProductRemoveACcent = removeAccents(
                     filme.nameProducts.toLowerCase()
@@ -100,14 +131,14 @@ const ProductsContext = ({ children }) => {
                 return regex.test(nameProductRemoveACcent);
             });
 
-            setAllProducts(resultProduct);
+            setAllProduct(resultProduct);
         }
     }
 
     // Efeito para obter todos os produtos ao carregar a página
     useEffect(() => {
         getProductsAll();
-    }, [tokenAuth]);
+    }, [tokenUser]);
 
     // Fornecimento do contexto para os componentes filhos
     return (
@@ -118,7 +149,7 @@ const ProductsContext = ({ children }) => {
                 handleSubmitProducts,
                 message,
                 searchAllProducts,
-                allProducts
+                allProduct
             }}
         >
             {children}

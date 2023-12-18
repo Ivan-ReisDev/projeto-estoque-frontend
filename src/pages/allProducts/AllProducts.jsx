@@ -15,7 +15,7 @@ const AllProducts = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProducts, searchAllProducts } = useContext(ContextProducts);
+    const { allProduct, searchAllProducts } = useContext(ContextProducts);
     const { formatarData, profile, handleDelete } = useContext(UserContext);
 
     const openModal = (data) => {
@@ -52,9 +52,9 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allProducts &&
-                        Array.isArray(allProducts) &&
-                        allProducts.map((product) => (
+                    {allProduct &&
+                        Array.isArray(allProduct) &&
+                        allProduct.map((product) => (
                             <tr key={product._id} >
                                 <td>{formatarData(product.createdAt)}</td>
                                 <td>{product.nameProducts}</td>
