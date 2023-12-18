@@ -14,28 +14,37 @@ const Modal = ({ isOpen, onClose, reserve }) => {
             <h2>Detalhes do Produto</h2>
             {reserve && (
                 <div className='container_modal'>
-                    
-                        <div className='content_Modal'>
-
-                            <label htmlFor="user">Usuário:</label>
-                            <input type="text" value={`${reserve.nameUser}`} />
-
-                            {/* <p><span className='itemProducts'>Criação:</span> {formatarData(reserve.createdAt)}</p>
-                            <p><span className='itemProducts'>Atualização:</span> {formatarData(reserve.updatedAt)}</p>
-                            <p><span className='itemProducts'>Usuario:</span> {reserve.nameUser}</p>
-                            <p><span className='itemProducts'>Produto:</span> {reserve.nameProducts}</p>
-                            <p><span className='itemProducts'>Categoria:</span> {reserve.category}</p>
-                            <p><span className='itemProducts'>SKU:</span> {reserve.codeSKU}</p> */}
-                        </div>
+                    <h2>Atualizar Produto</h2>
                         <div className='content_Modal'> 
-                        <h2>Atualizar Produto</h2>
-                            {/* <p><span className='itemProducts'>Link:</span> <a href={reserve.link} target='_blank' >{reserve.link}</a></p>
-                            <p><span className='itemProducts'>Marca:</span> {reserve.mark}</p>
-                            <p><span className='itemProducts'>Estoque:</span> {reserve.stock}</p>
-                            <p><span className='itemProducts'>Preço:</span> R$ {reserve.price}</p>
-                            <p><span className='itemProducts'>Localização:</span> {reserve.localization}</p>
-                            <p><span className='itemProducts'>Descrição:</span> {reserve.description}</p> */}
+                            <form>
+
+                            <label htmlFor="user">Usuário</label>
+                            <input type="text" id='user' value={`${reserve.nameUser}`} />
+
+                            <label htmlFor="products">Produto</label>
+                            <input type="text" id='products' value={reserve.nameProducts} />
+
+                            <label htmlFor="categoryEdit">Categoria:</label>
+                            <input type="text" id='categoryEdit' value={`${reserve.category}`} />
+
+                            <label htmlFor="sku">SKU:</label>
+                            <input type="text" id='sku' value={`${reserve.codeSKU}`} />
+
+                            <label htmlFor="mark">Marca</label>
+                            <input type="text" id='mark' value={`${reserve.mark}`} />
+
+                            <label htmlFor="stock">Estoque</label>
+                            <input type="text" id='stock' value={`${reserve.stock}`} />
+
+                            <label htmlFor="price">Preço:</label>
+                            <input type="text" id='price' value={`${reserve.price}`} />
+
+                            <label htmlFor="localization">Localização</label>
+                            <input type="text" id='localization' value={`${reserve.localization}`} />
+
+                        </form>
                         </div>
+    
                     
                     <div className='close'>
                         <button onClick={onClose}>X</button>
