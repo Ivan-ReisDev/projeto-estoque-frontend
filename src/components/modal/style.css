@@ -3,45 +3,71 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
-    height: 90%;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-height: 300px;
     margin: auto;
 }
 
 /*Fundo 1*/
 .ReactModal__Overlay--after-open {
-    background-color: transparent !important;
+    width: 100vw;
+    height: 93vh;
+    background-color: #2e2e2e79 !important;
 }
 
 /*Fundo 2*/
 .ReactModal__Content {
     width: 50%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: auto;
-    background-color: #34495E !important;
+    background-color: #f3f3f3 !important;
     position: absolute;
+}
+
+.ReactModal__Content h2 {
+    color: #000000;
+    margin: 0;
+
 }
 
 
 .container_modal {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
 }
 
+
 .container_modal p {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .container_modal button {
-    padding: 10px;
-    background-color: #000000;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: transparent;
+    color: #34495E;
     border: none;
     cursor: pointer;
-    position: relative;
-    top: -80px;
-    transition: .500s ease-in;
+    top: 15px;
+    right: 10px;
+    z-index: 1000;
+    position:  absolute;
+   
 }
 
-.container_modal button:hover {
-    background-color: #ff0000;
-    transition: .500s ease-in-out;
+.content_Modal {
+    width:100%;
+
+}
+
+.itemProducts {
+    font-weight: bold;
+
 }

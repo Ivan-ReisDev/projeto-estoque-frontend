@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react'
 import Modal from '../../components/modal/Modal'
+import ModalUpdate from '../../components/modalUpdate/ModalUpdate';
+import ModalDelete from '../../components/modalDelete/ModalDelete'
 import { ContextProducts } from '../../Context/ProductsContext';
 import { UserContext } from '../../Context/UserContext';
 import { FaEye, FaSearch } from "react-icons/fa";
@@ -11,15 +13,17 @@ const maxLeft = (maxItens - 1) / 2;
 
 import './style.css'
 
-const AllProducts = ({limit, total, offset}) => {
+const AllProducts = ({ limit, total, offset }) => {
 
-    const current = (offset /limit) + 1;
-    const pages =  Math.ceil(total / limit);
+    const current = (offset / limit) + 1;
+    const pages = Math.ceil(total / limit);
     const first = Math.max(current - maxLeft, 1);
 
-    
+
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false)
+    const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState(null);
 
     const { allProduct, searchAllProducts } = useContext(ContextProducts);
@@ -28,6 +32,16 @@ const AllProducts = ({limit, total, offset}) => {
     const openModal = (data) => {
         setSelectedProducts(data);
         setIsModalOpen(true);
+    };
+
+    const openModalUpdate = (data) => {
+        setSelectedProducts(data);
+        setIsModalOpenUpdate(true);
+    };
+
+    const openModalDelete = (data) => {
+        setSelectedProducts(data);
+        setIsModalOpenDelete(true);
     };
 
     return (
@@ -72,8 +86,9 @@ const AllProducts = ({limit, total, offset}) => {
                                 <td>{product.localization}</td>
                                 <td className='btn'>
                                     <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
-                                    {profile.userType === "Admin" && <button className='btn-single' onClick={() => openModal(product)}><IoSettings /></button>}
-                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}><IoTrashBin /></button>}
+                                    {profile.userType === "Admin" && <button className='btn-single' onClick={() => openModalUpdate(product)}><IoSettings /></button>}
+                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => openModalDelete(product)}><IoTrashBin /></button>}
+                                    {/* {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}><IoTrashBin /></button>} */}
 
                                 </td>
                             </tr>
@@ -91,6 +106,30 @@ const AllProducts = ({limit, total, offset}) => {
                     reserve={selectedProducts}
                 />
             )}
+
+            {selectedProducts && (
+                <ModalUpdate
+                    isOpen={isModalOpenUpdate}
+                    onClose={() => {
+                        setSelectedProducts(null);
+                        setIsModalOpenUpdate(false);
+                    }}
+                    reserve={selectedProducts}
+                />
+            )}
+
+            {selectedProducts && (
+                <ModalDelete
+                    isOpen={isModalOpenDelete}
+                    onClose={() => {
+                        setSelectedProducts(null);
+                        setIsModalOpenDelete(false);
+                    }}
+                    reserve={selectedProducts}
+                    handleDelete={handleDelete}
+                />
+            )}
+
         </div>
     )
 }

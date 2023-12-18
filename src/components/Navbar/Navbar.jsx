@@ -32,7 +32,7 @@ const Navbar = () => {
                 </ul>
             </nav>
             <NavLink to={'/home'} className='logo'>
-                <img src={Logo} alt="logo carropeça" /><h1>Carro peça</h1>
+                <img src={Logo} alt="logo carropeça" /><h1>Carro peças</h1> <span>v Alfa 1.0</span>
             </NavLink>
 
         </header>

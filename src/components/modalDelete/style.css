@@ -1,0 +1,33 @@
+.modalDelete {
+    height: 140px;
+    width: 600px;
+    border-radius: 5px;
+}
+
+.modalDelete input {
+    background-color: #FF0000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.modalDelete input:hover {
+    background-color: #cf0000;
+
+}
+
+
+.container_modal_delete {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.modalDelete  h2 {
+    text-transform: uppercase !important;
+}
