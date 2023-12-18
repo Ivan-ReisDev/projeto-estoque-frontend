@@ -48,8 +48,8 @@ const AllProducts = ({limit, total, offset}) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Data</th>
                         <th>Produto</th>
+                        <th>Descrição</th>
                         <th>Categoria</th>
                         <th>SKU</th>
                         <th>Estoque</th>
@@ -63,8 +63,8 @@ const AllProducts = ({limit, total, offset}) => {
                         Array.isArray(allProduct) &&
                         allProduct.map((product) => (
                             <tr key={product._id} >
-                                <td>{formatarData(product.createdAt)}</td>
                                 <td>{product.nameProducts}</td>
+                                <td>{product.description}</td>
                                 <td>{product.category}</td>
                                 <td>{product.codeSKU}</td>
                                 <td>{product.stock}</td>
