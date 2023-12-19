@@ -1,51 +1,52 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import ReactModal from 'react-modal';
 import { UserContext } from '../../Context/UserContext';
 import './style.css'
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, reserve }) => {
+const Modal = ({ isOpen, onClose, reserve, formData, setFormData,  handleUpdateProducts}) => {
 
-
-    const { formatarData } = useContext(UserContext)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+      };
 
     return (
-        <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto">
-            <h2>Detalhes do Produto</h2>
+        <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Update" className='modalUpdate'>
+            <h2>Atualizar Produto</h2>
             {reserve && (
                 <div className='container_modal'>
-                    <h2>Atualizar Produto</h2>
-                        <div className='content_Modal'> 
-                            <form>
 
-                            <label htmlFor="user">Usuário</label>
-                            <input type="text" id='user' value={`${reserve.nameUser}`} />
+                    <div className='content_Modal'>
+                        <form onSubmit={handleUpdateProducts} className='formUpdate'>
+                            <div className='formUpdateDiv'>
+                                <label htmlFor="products">Produto</label>
+                                <input type="text" id='products'  onChange={handleChange} />
 
-                            <label htmlFor="products">Produto</label>
-                            <input type="text" id='products' value={reserve.nameProducts} />
+                                <label htmlFor="categoryEdit">Categoria:</label>
+                                <input type="text" id='categoryEdit'  onChange={handleChange} />
 
-                            <label htmlFor="categoryEdit">Categoria:</label>
-                            <input type="text" id='categoryEdit' value={`${reserve.category}`} />
+                                <label htmlFor="sku">SKU:</label>
+                                <input type="text" id='sku'  onChange={handleChange} />
 
-                            <label htmlFor="sku">SKU:</label>
-                            <input type="text" id='sku' value={`${reserve.codeSKU}`} />
+                                <label htmlFor="mark">Marca</label>
+                                <input type="text" id='mark'  onChange={handleChange} />
+                            </div>
+                            <div className='formUpdateDiv'>
+                                <label htmlFor="stock">Estoque</label>
+                                <input type="text" id='stock' onChange={handleChange} />
 
-                            <label htmlFor="mark">Marca</label>
-                            <input type="text" id='mark' value={`${reserve.mark}`} />
+                                <label htmlFor="price">Preço:</label>
+                                <input type="text" id='price' onChange={handleChange} />
 
-                            <label htmlFor="stock">Estoque</label>
-                            <input type="text" id='stock' value={`${reserve.stock}`} />
-
-                            <label htmlFor="price">Preço:</label>
-                            <input type="text" id='price' value={`${reserve.price}`} />
-
-                            <label htmlFor="localization">Localização</label>
-                            <input type="text" id='localization' value={`${reserve.localization}`} />
-
+                                <label htmlFor="localization">Localização</label>
+                                <input type="text" id='localization'  onChange={handleChange} />
+                            </div>
+                                <input type="button" value={'Atualizar'}/>
                         </form>
-                        </div>
-    
-                    
+                    </div>
+
+
                     <div className='close'>
                         <button onClick={onClose}>X</button>
                     </div>

@@ -66,6 +66,43 @@ const ProductsContext = ({ children }) => {
     };
 
 
+    const handleUpdateProducts = async (id) => {
+        
+        try {
+            const res = await fetch(`${PRD}update/products/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify({
+                    nameProducts: formData.nameProducts,
+                    description: formData.description,
+                    category: formData.category,
+                    link: formData.link,
+                    codeSKU: formData.codeSKU,
+                    mark: formData.mark,
+                    stock: formData.stock,
+                    price: formData.price,
+                    localization: formData.localization
+                }),
+            });
+
+            const DataMSG = await res.json();
+
+            if (res.ok) {
+                window.location.reload();
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao atualizar produto: ${DataMSG.msg}`);
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar produto', error);
+        }
+    };
+
+
+
     // Função para obter todos os produtos
     const getProductsAll = async () => {
         try {
@@ -150,6 +187,7 @@ const ProductsContext = ({ children }) => {
                 message,
                 searchAllProducts,
                 allProduct,
+                handleUpdateProducts,
                 
             }}
         >

@@ -13,12 +13,7 @@ const maxLeft = (maxItens - 1) / 2;
 
 import './style.css'
 
-const AllProducts = ({ limit, total, offset }) => {
-
-    const current = (offset / limit) + 1;
-    const pages = Math.ceil(total / limit);
-    const first = Math.max(current - maxLeft, 1);
-
+const AllProducts = () => {
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,8 +21,8 @@ const AllProducts = ({ limit, total, offset }) => {
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProduct, searchAllProducts } = useContext(ContextProducts);
-    const { formatarData, profile, handleDelete } = useContext(UserContext);
+    const { allProduct, searchAllProducts, handleUpdateProducts } = useContext(ContextProducts);
+    const { formatarData, profile, handleDelete, formData, setFormData, } = useContext(UserContext);
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -115,6 +110,9 @@ const AllProducts = ({ limit, total, offset }) => {
                         setIsModalOpenUpdate(false);
                     }}
                     reserve={selectedProducts}
+                    handleUpdateProducts={handleUpdateProducts}
+                    formData={formData}
+                    setFormData={setFormData}
                 />
             )}
 
@@ -127,6 +125,7 @@ const AllProducts = ({ limit, total, offset }) => {
                     }}
                     reserve={selectedProducts}
                     handleDelete={handleDelete}
+
                 />
             )}
 

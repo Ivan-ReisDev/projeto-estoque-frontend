@@ -1,0 +1,29 @@
+.modalUpdate {
+    height: 600px;
+
+}
+
+.formUpdate {
+    background-color: aqua;
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100%;
+}
+
+.formUpdate input {
+    width: 250px;
+    height: 30px;
+}
+
+.formUpdateDiv {
+    margin-right: 25px;
+    background-color: antiquewhite;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+
+
+}
