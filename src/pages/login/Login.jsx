@@ -12,6 +12,13 @@ const Login = () => {
 
   return (
     <div className='wallpaper'>
+      <div className='LoginLeft'>
+      <p>Bem-vindo (a) <br></br> ao seu<br></br>novo hub <br></br> de <br></br> eficiência e controle!</p>
+      </div>
+      
+      <div className='LoginRight'>
+
+      
       <div className='login'>
         <h1>Login</h1>
         <img src={Logoimg} className='Logo' alt="Logo Carro Peça" />
@@ -31,10 +38,12 @@ const Login = () => {
             type="password"
             name='password'
             id='password'
+            placeholder='Digite sua senha'
             onChange={(e) => setDataLogin({ ...dataLogin, password: e.target.value })} />
           <input className='btn-login' type="submit" value='Login' />
         </form>
         <p>{message ? message.error : ''}</p>
+      </div>
       </div>
     </div>
   )
