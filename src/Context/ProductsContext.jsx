@@ -4,7 +4,7 @@ import removeAccents from 'remove-accents';
 import { UserContext } from './UserContext';
 
 
-const API = 'http://localhost:3000/api/';
+// const API = 'http://localhost:3000/api/';
 const PRD = 'https://backend-carropeca.vercel.app/api/'
 
 const ContextProducts = createContext('');
@@ -28,6 +28,18 @@ const ProductsContext = ({ children }) => {
         price: 0.00,
         localization: '',
     });
+    const [formUpdate, setFormUpdate] = useState({
+        nameProducts: '',
+        description: '',
+        category: '',
+        link: '',
+        codeSKU: '',
+        mark: '',
+        stock: 0,
+        price: 0.00,
+        localization: '',
+    });
+
 
     // Função para lidar com o envio do formulário de produtos
     const handleSubmitProducts = async (e) => {
@@ -46,7 +58,7 @@ const ProductsContext = ({ children }) => {
             });
 
             const DataMSG = await res.json();
-            console.log('teste', setMessage(DataMSG));
+            setMessage(DataMSG)
         } catch (error) {
             console.error('Erro ao criar produto', error);
         }
@@ -67,31 +79,33 @@ const ProductsContext = ({ children }) => {
 
 
     const handleUpdateProducts = async (id) => {
-        
+
         try {
+
+            const updateData = {
+                nameProducts: formUpdate.nameProducts,
+                description: formUpdate.description,
+                category: formUpdate.category,
+                link: formUpdate.link,
+                codeSKU: formUpdate.codeSKU,
+                mark: formUpdate.mark,
+                stock: formUpdate.stock,
+                price: formUpdate.price,
+                localization: formUpdate.localization
+            };
+
             const res = await fetch(`${PRD}update/products/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-
-                body: JSON.stringify({
-                    nameProducts: formData.nameProducts,
-                    description: formData.description,
-                    category: formData.category,
-                    link: formData.link,
-                    codeSKU: formData.codeSKU,
-                    mark: formData.mark,
-                    stock: formData.stock,
-                    price: formData.price,
-                    localization: formData.localization
-                }),
+                body: JSON.stringify(updateData),
             });
 
             const DataMSG = await res.json();
-
+            setMessage(DataMSG.msg);
             if (res.ok) {
-                window.location.reload();
+
                 setMessage(DataMSG.msg);
             } else {
                 setMessage(`Erro ao atualizar produto: ${DataMSG.msg}`);
@@ -102,7 +116,28 @@ const ProductsContext = ({ children }) => {
     };
 
 
+    // Função para excluir um produto
+    const handleDelete = async (id) => {
+        try {
+            const res = await fetch(`${PRD}remove/products/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            const DataMSG = await res.json();
+
+            if (res.ok) {
+                window.location.reload();
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao excluir produto: ${DataMSG.msg}`);
+            }
+        } catch (error) {
+            console.error('Erro ao deletar produto', error);
+        }
+    };
     // Função para obter todos os produtos
     const getProductsAll = async () => {
         try {
@@ -119,7 +154,6 @@ const ProductsContext = ({ children }) => {
         }
     };
 
-
     const fetchDataAndSetData = useCallback(async () => {
         try {
             const result = await getProductsAll();
@@ -129,7 +163,7 @@ const ProductsContext = ({ children }) => {
             }
 
         } catch (error) {
-            console.log("Ocorreu um erro, tente novamente mais tarde");
+            setMessage("Ocorreu um erro, tente novamente mais tarde");
         }
     }, []);
 
@@ -138,7 +172,7 @@ const ProductsContext = ({ children }) => {
         // Check if cached data exists
         const cachedData = localStorage.getItem(('produtos'));
         if (cachedData) {
-            setAllProduct(JSON.parse(cachedData));            
+            setAllProduct(JSON.parse(cachedData));
         }
 
         // Fetch new data
@@ -188,7 +222,10 @@ const ProductsContext = ({ children }) => {
                 searchAllProducts,
                 allProduct,
                 handleUpdateProducts,
-                
+                handleDelete,
+                setFormUpdate,
+                formUpdate,
+                getProductsAll
             }}
         >
             {children}

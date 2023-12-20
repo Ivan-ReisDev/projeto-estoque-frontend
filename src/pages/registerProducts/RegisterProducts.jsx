@@ -4,13 +4,12 @@ import { ContextProducts } from '../../Context/ProductsContext';
 
 const RegisterProducts = () => {
 
-  const { formData, setFormData, handleSubmitProducts } = useContext(ContextProducts);
+  const { formData, setFormData, handleSubmitProducts, message } = useContext(ContextProducts);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
 
   return (
 
@@ -27,13 +26,13 @@ const RegisterProducts = () => {
         <input type="text" name="category" id="category" value={formData.category} onChange={handleChange} required />
 
         <label htmlFor="link">Link </label>
-        <input type="url" name="link" id="link" value={formData.link} onChange={handleChange}  />
+        <input type="url" name="link" id="link" value={formData.link} onChange={handleChange} />
 
         <label htmlFor="codeSKU">Código SKU *</label>
         <input type="text" name="codeSKU" id="codeSKU" value={formData.codeSKU} onChange={handleChange} required />
 
         <label htmlFor="mark">Marca</label>
-        <input type="text" name="mark" id="mark" value={formData.mark} onChange={handleChange}  />
+        <input type="text" name="mark" id="mark" value={formData.mark} onChange={handleChange} />
 
         <label htmlFor="stock">Estoque *</label>
         <input type="number" name="stock" id="stock" value={formData.stock} onChange={handleChange} required />
@@ -46,7 +45,7 @@ const RegisterProducts = () => {
 
         <button type="submit">Registrar</button>
       </form>
-    
+      {message ? <p>{message}</p> : []}
     </div>
   );
 };

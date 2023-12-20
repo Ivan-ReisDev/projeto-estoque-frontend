@@ -6,12 +6,12 @@ import { ContextProducts } from '../../Context/ProductsContext';
 import { UserContext } from '../../Context/UserContext';
 import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
+import './style.css'
 // import { CiSearch } from "react-icons/ci";
 
 const maxItens = 20;
 const maxLeft = (maxItens - 1) / 2;
 
-import './style.css'
 
 const AllProducts = () => {
 
@@ -21,8 +21,8 @@ const AllProducts = () => {
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProduct, searchAllProducts, handleUpdateProducts } = useContext(ContextProducts);
-    const { formatarData, profile, handleDelete, formData, setFormData, } = useContext(UserContext);
+    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete } = useContext(ContextProducts);
+    const { profile } = useContext(UserContext);
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -111,8 +111,6 @@ const AllProducts = () => {
                     }}
                     reserve={selectedProducts}
                     handleUpdateProducts={handleUpdateProducts}
-                    formData={formData}
-                    setFormData={setFormData}
                 />
             )}
 

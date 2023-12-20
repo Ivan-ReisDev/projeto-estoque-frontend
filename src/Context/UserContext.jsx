@@ -54,30 +54,6 @@ const AuthContext = ({ children }) => {
         }
     };
 
-    // Função para excluir um produto
-    const handleDelete = async (id) => {
-        try {
-            const res = await fetch(`${PRD}remove/products/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const DataMSG = await res.json();
-
-            if (res.ok) {
-                window.location.reload();
-                setMessage(DataMSG.msg);
-            } else {
-                setMessage(`Erro ao excluir produto: ${DataMSG.msg}`);
-            }
-        } catch (error) {
-            console.error('Erro ao deletar produto', error);
-        }
-    };
-
-  
 
     // Efeito para obter o perfil do usuário
     useEffect(() => {
@@ -142,7 +118,6 @@ const AuthContext = ({ children }) => {
                 dataLogin,
                 setDataLogin,
                 handleSubmitLogin,
-                handleDelete,
                 tokenUser,
                 exit,
                 message,
