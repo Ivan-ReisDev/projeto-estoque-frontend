@@ -21,7 +21,7 @@ const AllProducts = () => {
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete } = useContext(ContextProducts);
+    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, getProductsAll } = useContext(ContextProducts);
     const { profile } = useContext(UserContext);
 
     const openModal = (data) => {
@@ -38,13 +38,13 @@ const AllProducts = () => {
         setSelectedProducts(data);
         setIsModalOpenDelete(true);
     };
-
+    
     return (
         <div className='service-details'>
 
             <div className='seach'>
                 <div className='seach-input'>
-                    <input type="text" name="seach" id="seach" placeholder='Pesquisar' onChange={(e) => searchAllProducts(e)} />
+                    <input type="text" name="seach" id="seach" placeholder='Pesquisar' onChange={(e) => searchAllProducts && searchAllProducts(e)} />
                     <span><FaSearch className='icon' /></span>
                 </div>
                 <select name="category" id="category">
