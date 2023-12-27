@@ -57,8 +57,14 @@ const ProductsContext = ({ children }) => {
                 }),
             });
 
+
             const DataMSG = await res.json();
-            setMessage(DataMSG)
+            if (res.ok) {
+                fetchDataAndSetData();
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao cadastrar produto: ${DataMSG.msg}`);
+            }
         } catch (error) {
             console.error('Erro ao criar produto', error);
         }
@@ -103,9 +109,9 @@ const ProductsContext = ({ children }) => {
             });
 
             const DataMSG = await res.json();
-            setMessage(DataMSG.msg);
-            if (res.ok) {
 
+            if (res.ok) {
+                fetchDataAndSetData();
                 setMessage(DataMSG.msg);
             } else {
                 setMessage(`Erro ao atualizar produto: ${DataMSG.msg}`);
@@ -195,10 +201,10 @@ const ProductsContext = ({ children }) => {
             // Se a string de pesquisa estiver vazia, recarregue todos os produtos da API
             getProductsAll();
         } else {
-            const resultProduct = allProduct.filter((filme) => {
+            const resultProduct = allProduct.filter((products) => {
                 const termSearch = removeAccents(value.replace(/\s+/g, '.*\\b'));
                 const nameProductRemoveACcent = removeAccents(
-                    filme.nameProducts.toLowerCase()
+                    products.nameProducts.toLowerCase()
                 );
                 const regex = new RegExp(`\\b${termSearch}.*`, 'i');
                 return regex.test(nameProductRemoveACcent);
