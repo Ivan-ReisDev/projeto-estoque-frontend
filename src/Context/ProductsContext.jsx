@@ -129,7 +129,7 @@ const ProductsContext = ({ children }) => {
             const DataMSG = await res.json();
 
             if (res.ok) {
-                window.location.reload();
+                fetchDataAndSetData();
                 setMessage(DataMSG.msg);
             } else {
                 setMessage(`Erro ao excluir produto: ${DataMSG.msg}`);
@@ -148,11 +148,13 @@ const ProductsContext = ({ children }) => {
                 },
             });
             const data = await res.json();
-            return data
+            setAllProduct(data); // Atualize o estado local com os novos dados
+            return data;
         } catch (error) {
             setMessage(error);
         }
     };
+
 
     const fetchDataAndSetData = useCallback(async () => {
         try {
@@ -209,7 +211,7 @@ const ProductsContext = ({ children }) => {
     // Efeito para obter todos os produtos ao carregar a página
     useEffect(() => {
         getProductsAll();
-    }, [tokenUser]);
+    }, [setAllProduct, tokenUser]);
 
     // Fornecimento do contexto para os componentes filhos
     return (

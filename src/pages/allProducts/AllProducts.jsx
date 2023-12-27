@@ -68,7 +68,7 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allProduct &&
+                    {allProduct ?
                         Array.isArray(allProduct) &&
                         allProduct.map((product) => (
                             <tr key={product._id} >
@@ -87,7 +87,7 @@ const AllProducts = () => {
 
                                 </td>
                             </tr>
-                        ))}
+                        )) : []}
                 </tbody>
             </table>
 
