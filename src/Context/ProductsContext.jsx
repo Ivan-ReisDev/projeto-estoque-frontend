@@ -112,7 +112,7 @@ const ProductsContext = ({ children }) => {
             }
         } catch (error) {
             console.error('Erro ao atualizar produto', error);
-        }
+                        };
     };
 
 
@@ -221,6 +221,7 @@ const ProductsContext = ({ children }) => {
                 formData,
                 handleSubmitProducts,
                 message,
+                setMessage,
                 searchAllProducts,
                 allProduct,
                 handleUpdateProducts,

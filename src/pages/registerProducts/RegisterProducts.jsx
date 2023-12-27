@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import './style.css';
 import { ContextProducts } from '../../Context/ProductsContext';
 
@@ -45,7 +45,6 @@ const RegisterProducts = () => {
 
         <button type="submit">Registrar</button>
       </form>
-      {message ? <p>{message}</p> : []}
     </div>
   );
 };
