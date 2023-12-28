@@ -24,7 +24,7 @@ const RegisterProducts = () => {
               type="text"
               name="nameProducts"
               id="nameProducts"
-              value={formData.nameProducts}
+              value={formData.nameProducts.toUpperCase()}
               onChange={handleChange}
               placeholder="Digite o nome do produto"
               required
@@ -35,7 +35,7 @@ const RegisterProducts = () => {
               type="text"
               name="codeSKU"
               id="codeSKU"
-              value={formData.codeSKU}
+              value={formData.codeSKU.toUpperCase()}
               onChange={handleChange}
               placeholder="Código SKU (CP-6545)"
               required
@@ -66,7 +66,7 @@ const RegisterProducts = () => {
             <textarea
               name="description"
               id="description"
-              value={formData.description}
+              value={formData.description.toUpperCase()}
               onChange={handleChange}
               placeholder="Descrição do produto"
               required
@@ -79,7 +79,7 @@ const RegisterProducts = () => {
               type="text"
               name="category"
               id="category"
-              value={formData.category}
+              value={formData.category.toUpperCase()}
               onChange={handleChange}
               placeholder="Informa a categoria do produto"
               required
@@ -102,7 +102,7 @@ const RegisterProducts = () => {
               type="text"
               name="mark"
               id="mark"
-              value={formData.mark}
+              value={formData.mark.toUpperCase()}
               onChange={handleChange}
               placeholder="Informe a marca do produto"
             />
@@ -112,7 +112,7 @@ const RegisterProducts = () => {
               type="text"
               name="localization"
               id="localization"
-              value={formData.localization}
+              value={formData.localization.toUpperCase()}
               onChange={handleChange}
               placeholder="Informe a localização do produto"
               required

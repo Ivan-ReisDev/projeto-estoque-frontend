@@ -78,7 +78,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="nameProducts"
                                 id="nameProducts"
-                                value={formUpdate.nameProducts}
+                                value={formUpdate.nameProducts.toUpperCase()}
                                 onChange={handleChange}
                                 placeholder="Digite o nome do produto"
                                 required
@@ -89,7 +89,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="codeSKU"
                                 id="codeSKU"
-                                value={formUpdate.codeSKU}
+                                value={formUpdate.codeSKU.toUpperCase()}
                                 onChange={handleChange}
                                 required
                             />
@@ -118,7 +118,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                             <textarea
                                 name="description"
                                 id="description"
-                                value={formUpdate.description}
+                                value={formUpdate.description.toUpperCase()}
                                 onChange={handleChange}
                                 required
                             />
@@ -130,7 +130,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="category"
                                 id="category"
-                                value={formUpdate.category}
+                                value={formUpdate.category.toUpperCase()}
                                 onChange={handleChange}
                                 required
                             />
@@ -150,7 +150,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="mark"
                                 id="mark"
-                                value={formUpdate.mark}
+                                value={formUpdate.mark.toUpperCase()}
                                 onChange={handleChange}
                             />
 
@@ -161,7 +161,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="localization"
                                 id="localization"
-                                value={formUpdate.localization}
+                                value={formUpdate.localization.toUpperCase()}
                                 onChange={handleChange}
                                 required
                             />
