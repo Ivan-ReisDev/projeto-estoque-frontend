@@ -1,46 +1,81 @@
-.container_registerProduct {
+.container_registerProduct, .container_registerProductTwo {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: auto;
     height: 93%;
+    color: #353535;
 }
 
 
+.container_registerProduct p{
+    color: #008000 ;
+
+
+}
+
+.container_registerProductTwo {
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    height: 80%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 15px #a3a3a3;
+    padding: 20px;
+
+}
+
 .container_registerProduct label{
-    color: #FFFFFF;
+    color: #4e4e4e;
     font-weight:  bold;
 }
 
 .container_registerProduct  form {
-    width: 70%;
-    background-color: #7a7a7a;
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container_registerProduct button{
-    background-color: #FFFFFF;
+    background-color: rgba(230, 230, 230, 0.836) !important;
+    padding: 10px;
     margin-top: 5%;
-    color: black;
-    padding: 10px;   
+    color: #34495E;
+    padding: 10px;  
+    font-weight: bold;
     cursor: pointer;
     border: none;
     transition: .300s ease-in;
-    border: 1px solid transparent;
+    border:transparent;
 
 }
 
 .container_registerProduct button:hover{
-    background-color: #353535;
-    border: 1px solid #FFFFFF;
-    color: #FFFFFF;
+    background-color: rgba(180, 180, 180, 0.836) !important; 
     transition: .300s ease-in-out;
 }
 
 .container_registerProduct input, .container_registerProduct textarea {
+    padding: 5px;
     height: 29px;
     width: 100%;
     background-color: #fff;
-    border: solid 1px rgb(99, 99, 99);
+    border: solid 1px rgb(71, 71, 71);
     border-radius: 5px;
     color: #7a7a7a;
+}
+
+.registerProductsPrincipal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row;
+}
+
+.container_registerProduct-interno {
+    padding: 15px;
+    width: 40%;
 }

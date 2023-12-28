@@ -9,10 +9,6 @@ import { IoSettings, IoTrashBin } from "react-icons/io5";
 import './style.css'
 // import { CiSearch } from "react-icons/ci";
 
-const maxItens = 20;
-const maxLeft = (maxItens - 1) / 2;
-
-
 const AllProducts = () => {
 
 
@@ -21,7 +17,7 @@ const AllProducts = () => {
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, getProductsAll } = useContext(ContextProducts);
+    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, getProductsAll, setMessage } = useContext(ContextProducts);
     const { profile } = useContext(UserContext);
 
     const openModal = (data) => {
@@ -35,8 +31,10 @@ const AllProducts = () => {
     };
 
     const openModalDelete = (data) => {
+        setMessage('')
         setSelectedProducts(data);
         setIsModalOpenDelete(true);
+        
     };
     
     return (
@@ -47,12 +45,7 @@ const AllProducts = () => {
                     <input type="text" name="seach" id="seach" placeholder='Pesquisar' onChange={(e) => searchAllProducts && searchAllProducts(e)} />
                     <span><FaSearch className='icon' /></span>
                 </div>
-                <select name="category" id="category">
-                    <option value="category1">Categoria</option>
-                    <option value="category1">Valor 1</option>
-                    <option value="category3" >Valor 2</option>
-                    <option value="category">Valor 3</option>
-                </select>
+            
             </div>
             <table>
                 <thead>

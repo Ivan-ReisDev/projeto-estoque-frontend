@@ -23,6 +23,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
         useContext(ContextProducts);
 
     useEffect(() => {
+        setMessage('')
         setFormUpdate({
             _id,
             nameProducts: nameProducts || "",
@@ -82,54 +83,13 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 placeholder="Digite o nome do produto"
                                 required
                             />
-                            <label htmlFor="mark">Marca</label>
-                            <input
-                                type="text"
-                                name="mark"
-                                id="mark"
-                                value={formUpdate.mark}
-                                onChange={handleChange}
-                            />
 
-
-
-                            <label htmlFor="category">Categoria *</label>
-                            <input
-                                type="text"
-                                name="category"
-                                id="category"
-                                value={formUpdate.category}
-                                onChange={handleChange}
-                                required
-                            />
-
-                            <label htmlFor="link">Link </label>
-                            <input
-                                type="url"
-                                name="link"
-                                id="link"
-                                value={formUpdate.link}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="codeSKU">Código SKU *</label>
+                            <label htmlFor="codeSKU">SKU *</label>
                             <input
                                 type="text"
                                 name="codeSKU"
                                 id="codeSKU"
                                 value={formUpdate.codeSKU}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="modalInterno">
-
-
-                            <label htmlFor="stock">Estoque *</label>
-                            <input
-                                type="number"
-                                name="stock"
-                                id="stock"
-                                value={formUpdate.stock}
                                 onChange={handleChange}
                                 required
                             />
@@ -145,14 +105,13 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 required
                             />
 
-                            <label htmlFor="localization">Localização *</label>
+                            <label htmlFor="link">Link </label>
                             <input
-                                type="text"
-                                name="localization"
-                                id="localization"
-                                value={formUpdate.localization}
+                                type="url"
+                                name="link"
+                                id="link"
+                                value={formUpdate.link}
                                 onChange={handleChange}
-                                required
                             />
 
                             <label htmlFor="description">Descrição *</label>
@@ -163,6 +122,50 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 onChange={handleChange}
                                 required
                             />
+                        </div>
+                        <div className="modalInterno">
+
+                            <label htmlFor="category">Categoria *</label>
+                            <input
+                                type="text"
+                                name="category"
+                                id="category"
+                                value={formUpdate.category}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <label htmlFor="stock">Estoque *</label>
+                            <input
+                                type="number"
+                                name="stock"
+                                id="stock"
+                                value={formUpdate.stock}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <label htmlFor="mark">Marca</label>
+                            <input
+                                type="text"
+                                name="mark"
+                                id="mark"
+                                value={formUpdate.mark}
+                                onChange={handleChange}
+                            />
+
+
+
+                            <label htmlFor="localization">Localização *</label>
+                            <input
+                                type="text"
+                                name="localization"
+                                id="localization"
+                                value={formUpdate.localization}
+                                onChange={handleChange}
+                                required
+                            />
+
                         </div>
                     </div>
                     <button className="submit" type="submit">
