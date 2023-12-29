@@ -35,7 +35,7 @@ const AllProducts = () => {
         
     };
 
-    const [itensPerPages, setItensPerPages] = useState(10);
+    const [itensPerPages, setItensPerPages] = useState(20);
     const [currentPages, setCurrentPages] = useState(0)
     const pages = Math.ceil(allProduct.length / itensPerPages)
     const startIndex = currentPages * itensPerPages;
