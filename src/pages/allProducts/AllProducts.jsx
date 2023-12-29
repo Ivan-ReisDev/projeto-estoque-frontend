@@ -50,9 +50,10 @@ const AllProducts = () => {
                     <span><FaSearch className='icon' /></span>
                 </div>
 
-                {/* <div>
+                 <div className='qtdItens'>
                     <label htmlFor="qtdItens">Quantidade de itens</label>
-                    <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))}>
+                    <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))} placeholder='10'>
+                    <option value="" disabled selected>Selecione...</option>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={15}>15</option>
@@ -60,7 +61,7 @@ const AllProducts = () => {
                     <option value={30}>30</option>
                     <option value={40}>40</option>
                     </select>
-                </div> */}
+                </div> 
             
             </div>
             <table>

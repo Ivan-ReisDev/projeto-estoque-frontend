@@ -27,7 +27,7 @@ const Navbar = () => {
                     <li><NavLink to={'/home'}><span><FaHome className='icon' /></span> Home</NavLink></li>
                     <li><NavLink to={'/products'}> <span><FaBoxOpen className='icon' /></span> Inventário</NavLink></li>
                     <li><NavLink to={'/products/register'}> <span><MdAddBox className='icon' /></span>Cadastrar</NavLink></li>
-                    <li><NavLink to={'/users'}> <span><FaUsers className='icon' /></span> Usuários</NavLink></li>
+                    <li><NavLink to={'/paneluser'}> <span><FaUsers className='icon' /></span> Usuários</NavLink></li>
                     <li><button onClick={() => exit()}>Logout</button></li>
                 </ul>
             </nav>

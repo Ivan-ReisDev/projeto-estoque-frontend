@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,8 @@ const AuthContext = ({ children }) => {
     const [tokenUser, setTokenUser] = useState('');
 
     const [profile, setProfile] = useState(dataUser || null);
+
+    const [getUserAll, setGetUserAll] = useState([]);
 
     // Função para lidar com o envio do formulário de login
     const handleSubmitLogin = async (e) => {
@@ -110,6 +112,53 @@ const AuthContext = ({ children }) => {
         return `${dia}/${mes}/${ano}`;
     }
 
+    const getUsers = async () => {
+        try {
+            const res = await fetch(`${PRD}all/users`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenUser}`,
+                },
+            });
+            const data = await res.json();
+            setGetUserAll(data); // Atualize o estado local com os novos dados
+            return data;
+        } catch (error) {
+            setMessage(error);
+        }
+    };
+
+    const fetchDataAndSetData = useCallback(async () => {
+        try {
+            const result = await getUsers();
+
+            if (result) {
+                localStorage.setItem('users', JSON.stringify(result));
+            }
+
+        } catch (error) {
+            setMessage("Ocorreu um erro, tente novamente mais tarde");
+        }
+    }, []);
+
+
+    useEffect(() => {
+        // Check if cached data exists
+        const cachedData = localStorage.getItem(('users'));
+        if (cachedData) {
+            setGetUserAll(JSON.parse(cachedData));
+        }
+
+        // Fetch new data
+        fetchDataAndSetData();
+
+        const refreshInterval = setInterval(fetchDataAndSetData, 1 * 60 * 1000);
+
+        return () => {
+            clearInterval(refreshInterval);
+        };
+    }, [fetchDataAndSetData]);
+
 
     // Fornecimento do contexto para os componentes filhos
     return (
@@ -123,6 +172,8 @@ const AuthContext = ({ children }) => {
                 message,
                 formatarData,
                 profile,
+                getUsers,
+                getUserAll,
             }}
         >
             {children}

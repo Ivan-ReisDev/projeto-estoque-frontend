@@ -133,3 +133,36 @@
   .btnPagination button:hover {
     background-color: #253544;
   }
+
+  .qtdItens {
+    margin-left: 15px;
+    overflow: hidden;
+    border: 1px solid #34495E;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .qtdItens label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .qtdItens select {
+    border: none;
+    text-align: center;
+    color: #000000;
+    background-color: transparent;
+  }
+  .qtdItens select:focus{
+    border:none;
+    outline: 0;
+    box-shadow: none;
+}
