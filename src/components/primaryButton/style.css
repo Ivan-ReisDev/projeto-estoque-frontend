@@ -1,0 +1,18 @@
+.btnPrimary {
+    background-color: rgba(230, 230, 230, 0.836) !important;
+    padding: 10px;
+    margin-top: 5%;
+    color: #34495E;
+    padding: 10px;  
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: .300s ease-in;
+    border:transparent;
+
+}
+
+.btnPrimary:hover{
+    background-color: rgba(180, 180, 180, 0.836) !important; 
+    transition: .300s ease-in-out;
+}

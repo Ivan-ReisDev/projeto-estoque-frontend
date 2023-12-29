@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import ReactModal from "react-modal";
 import "./style.css";
 import { ContextProducts } from "../../Context/ProductsContext";
+import InputNew from "../input/InputNew";
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
@@ -19,7 +20,7 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
         localization,
     } = reserve;
 
-    const { setFormUpdate, formUpdate, message, setMessage, getProductsAll } =
+    const { setFormUpdate, formUpdate, message, setMessage} =
         useContext(ContextProducts);
 
     useEffect(() => {
@@ -74,95 +75,98 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                     <div className="modalInternoPrincipal">
                         <div className="modalInterno">
                             <label htmlFor="nameProducts">Produto *</label>
-                            <input
+                            <InputNew
+                                className='inputUpdate'
                                 type="text"
                                 name="nameProducts"
                                 id="nameProducts"
                                 value={formUpdate.nameProducts.toUpperCase()}
-                                onChange={handleChange}
+                                handleChange={handleChange}
                                 placeholder="Digite o nome do produto"
                                 required
                             />
 
+                            <label htmlFor="description">Descrição *</label>
+                            <InputNew
+                                name="description"
+                                id="description"
+                                value={formUpdate.description.toUpperCase()}
+                                handleChange={handleChange}
+                                required
+                            />
+
+                            <label htmlFor="stock">Estoque *</label>
+                            <InputNew
+                                type="number"
+                                name="stock"
+                                id="stock"
+                                value={formUpdate.stock}
+                                handleChange={handleChange}
+                                required
+                            />
+
                             <label htmlFor="codeSKU">SKU *</label>
-                            <input
+                            <InputNew
                                 type="text"
                                 name="codeSKU"
                                 id="codeSKU"
                                 value={formUpdate.codeSKU.toUpperCase()}
-                                onChange={handleChange}
+                                handleChange={handleChange}
                                 required
                             />
 
+                            <label htmlFor="link">Link </label>
+                            <InputNew
+                                type="url"
+                                name="link"
+                                id="link"
+                                value={formUpdate.link}
+                                handleChange={handleChange}
+                            />
+
+                        </div>
+                        <div className="modalInterno">
+
+                            <label htmlFor="category">Categoria *</label>
+                            <InputNew
+                                type="text"
+                                name="category"
+                                id="category"
+                                value={formUpdate.category.toUpperCase()}
+                                handleChange={handleChange}
+                                required
+                            />
+
+                            <label htmlFor="mark">Marca</label>
+                            <InputNew
+                                type="text"
+                                name="mark"
+                                id="mark"
+                                handleChange={formUpdate.mark.toUpperCase()}
+                                onChange={handleChange}
+                            />
                             <label htmlFor="price">Preço *</label>
-                            <input
+                            <InputNew
                                 type="number"
                                 step="0.01"
                                 name="price"
                                 id="price"
                                 value={formUpdate.price}
-                                onChange={handleChange}
+                                handleChange={handleChange}
                                 required
                             />
 
-                            <label htmlFor="link">Link </label>
-                            <input
-                                type="url"
-                                name="link"
-                                id="link"
-                                value={formUpdate.link}
-                                onChange={handleChange}
-                            />
 
-                            <label htmlFor="description">Descrição *</label>
-                            <textarea
-                                name="description"
-                                id="description"
-                                value={formUpdate.description.toUpperCase()}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="modalInterno">
-
-                            <label htmlFor="category">Categoria *</label>
-                            <input
-                                type="text"
-                                name="category"
-                                id="category"
-                                value={formUpdate.category.toUpperCase()}
-                                onChange={handleChange}
-                                required
-                            />
-
-                            <label htmlFor="stock">Estoque *</label>
-                            <input
-                                type="number"
-                                name="stock"
-                                id="stock"
-                                value={formUpdate.stock}
-                                onChange={handleChange}
-                                required
-                            />
-
-                            <label htmlFor="mark">Marca</label>
-                            <input
-                                type="text"
-                                name="mark"
-                                id="mark"
-                                value={formUpdate.mark.toUpperCase()}
-                                onChange={handleChange}
-                            />
 
 
 
                             <label htmlFor="localization">Localização *</label>
-                            <input
+                            <InputNew
                                 type="text"
                                 name="localization"
                                 id="localization"
                                 value={formUpdate.localization.toUpperCase()}
-                                onChange={handleChange}
+                                handleChange={handleChange}
                                 required
                             />
 

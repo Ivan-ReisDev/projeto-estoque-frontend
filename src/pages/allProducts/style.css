@@ -15,8 +15,10 @@
   }
   
   .service-details  th, td {
-    min-width: 130px;
-    padding: 5px;
+    min-width: 140px;
+    padding: 3px;
+    font-size: 13px;
+    text-transform: uppercase;
     color: transparent;
   }
   
@@ -109,4 +111,25 @@
     align-items: center;
     justify-content: center;
     margin: 0 10px;
+  }
+
+  .btnPagination {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+  }
+
+  .btnPagination button {
+    background-color: #34495E;
+    border: none;
+    margin: 3px;
+    cursor: pointer;
+  }
+
+  .btnPagination button:hover {
+    background-color: #253544;
   }

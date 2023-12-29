@@ -40,6 +40,8 @@ const ProductsContext = ({ children }) => {
         localization: '',
     });
 
+    const [selectedProducts, setSelectedProducts] = useState(null);
+    const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
 
     // Função para lidar com o envio do formulário de produtos
     const handleSubmitProducts = async (e) => {
@@ -121,7 +123,10 @@ const ProductsContext = ({ children }) => {
                         };
     };
 
-
+   const onClose = () => {
+        setSelectedProducts(null);
+        setIsModalOpen(false);
+    }
     // Função para excluir um produto
     const handleDelete = async (id) => {
         try {
@@ -137,6 +142,7 @@ const ProductsContext = ({ children }) => {
             if (res.ok) {
                 fetchDataAndSetData();
                 setMessage(DataMSG.msg);
+                onClose()
             } else {
                 setMessage(`Erro ao excluir produto: ${DataMSG.msg}`);
             }
@@ -212,6 +218,7 @@ const ProductsContext = ({ children }) => {
 
             setAllProduct(resultProduct);
         }
+
     }
 
     // Efeito para obter todos os produtos ao carregar a página
@@ -234,7 +241,12 @@ const ProductsContext = ({ children }) => {
                 handleDelete,
                 setFormUpdate,
                 formUpdate,
-                getProductsAll
+                getProductsAll,
+                setSelectedProducts,
+                selectedProducts,
+                setIsModalOpenDelete,
+                isModalOpenDelete,
+                onClose
             }}
         >
             {children}

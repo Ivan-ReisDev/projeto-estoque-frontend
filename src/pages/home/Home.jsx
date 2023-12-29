@@ -5,7 +5,9 @@ import InventarioImg from '../../assets/Checking boxes-amico.png'
 import CadastroProdut from '../../assets/cadastro.png'
 import UsersImg from '../../assets/users.png'
 import Relatorio from '../../assets/relatorio.png'
+
 import './Home.css'
+import InputFormatMoeda from '../../components/inputNumeral/InputFormatMoeda.jsx'
 
 
 const Home = () => {

@@ -14,10 +14,8 @@ const AllProducts = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false)
-    const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
-    const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, getProductsAll, setMessage } = useContext(ContextProducts);
+    const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, setMessage, selectedProducts, setSelectedProducts, isModalOpenDelete, setIsModalOpenDelete } = useContext(ContextProducts);
     const { profile } = useContext(UserContext);
 
     const openModal = (data) => {
@@ -36,15 +34,33 @@ const AllProducts = () => {
         setIsModalOpenDelete(true);
         
     };
+
+    const [itensPerPages, setItensPerPages] = useState(10);
+    const [currentPages, setCurrentPages] = useState(0)
+    const pages = Math.ceil(allProduct.length / itensPerPages)
+    const startIndex = currentPages * itensPerPages;
+    const endIndex = startIndex + itensPerPages;
+    const currentItens = allProduct.slice(startIndex, endIndex)
     
     return (
         <div className='service-details'>
-
             <div className='seach'>
                 <div className='seach-input'>
                     <input type="text" name="seach" id="seach" placeholder='Pesquisar' onChange={(e) => searchAllProducts && searchAllProducts(e)} />
                     <span><FaSearch className='icon' /></span>
                 </div>
+
+                {/* <div>
+                    <label htmlFor="qtdItens">Quantidade de itens</label>
+                    <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))}>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                    <option value={30}>30</option>
+                    <option value={40}>40</option>
+                    </select>
+                </div> */}
             
             </div>
             <table>
@@ -61,9 +77,10 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    {console.log(allProduct.length)}
                     {allProduct ?
                         Array.isArray(allProduct) &&
-                        allProduct.map((product) => (
+                        currentItens.map((product) => (
                             <tr key={product._id} >
                                 <td>{product.nameProducts}</td>
                                 <td>{product.description}</td>
@@ -82,15 +99,18 @@ const AllProducts = () => {
                             </tr>
                         )) : []}
                 </tbody>
+                <div className='btnPagination'>{Array.from(Array(pages), (itens, index) =>{
+                return <button value={index} onClick={(e) => setCurrentPages(Number(e.target.value))}>{index + 1}</button>
+            })}</div>
             </table>
 
             {selectedProducts && (
                 <Modal
+                onClose={() => {
+                    setSelectedProducts(null);
+                    setIsModalOpen(false);
+                }}
                     isOpen={isModalOpen}
-                    onClose={() => {
-                        setSelectedProducts(null);
-                        setIsModalOpen(false);
-                    }}
                     reserve={selectedProducts}
                 />
             )}
