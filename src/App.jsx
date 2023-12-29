@@ -22,7 +22,7 @@ function App() {
         <Route path='/home' element={tokenUser && <Home />} />
         <Route path='/products' element={tokenUser && <AllProducts />} />
         <Route path='/products/register' element={tokenUser && <RegisterProducts />} />
-        <Route path='/paneluser' element={tokenUser && profile.userType === "Administrador" ? <PanelUser /> : <Home />} />
+        <Route path='/paneluser' element={tokenUser && <PanelUser />} />
         <Route path='/*' element={tokenUser ? <Home /> : <Login />} />
       </Routes>
       <Analytics />
