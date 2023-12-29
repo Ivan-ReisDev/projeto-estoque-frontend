@@ -44,10 +44,9 @@
 }
 
 
-
-
 .container_modal p {
     color: #000000;
+    text-transform: uppercase;
 }
 
 .container_modal button {
