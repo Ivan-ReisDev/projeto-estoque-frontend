@@ -92,8 +92,8 @@ const AllProducts = () => {
                                 <td>{product.localization}</td>
                                 <td className='btn'>
                                     <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
-                                    {profile.userType === "Admin" && <button className='btn-single' onClick={() => openModalUpdate(product)}><IoSettings /></button>}
-                                    {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => openModalDelete(product)}><IoTrashBin /></button>}
+                                    {profile.userType === "Administrador" && <button className='btn-single' onClick={() => openModalUpdate(product)}><IoSettings /></button>}
+                                    {profile.userType === "Administrador" && <button className='btn-single btn-single-delete' onClick={() => openModalDelete(product)}><IoTrashBin /></button>}
                                     {/* {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}><IoTrashBin /></button>} */}
 
                                 </td>
