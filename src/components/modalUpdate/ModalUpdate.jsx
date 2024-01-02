@@ -5,7 +5,7 @@ import { ContextProducts } from "../../Context/ProductsContext";
 import InputNew from "../input/InputNew";
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
+const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
     // eslint-disable-next-line react/prop-types
     const {
         _id,
@@ -186,4 +186,4 @@ const Modal = ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
     );
 };
 
-export default Modal;
+export default ModalUpdate;

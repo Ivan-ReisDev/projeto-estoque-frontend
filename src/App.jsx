@@ -9,6 +9,7 @@ import PanelUser from './pages/registerUser/PenelUser'
 import './App.css'
 import { UserContext } from './Context/UserContext'
 import RegisterProducts from './pages/registerProducts/RegisterProducts'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

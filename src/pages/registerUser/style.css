@@ -1,40 +1,25 @@
 .panelUser {
-    width: 100vw;
-    height: 93vh;
-    display: flex;
-    align-items: start;
-    justify-content: center;
+  display: flex;
+  margin-top: 1em;
+  align-items: start;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
+#tbUser {
+  width: 70vw;
 
-.panelUser table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-width: 500px !important;
-    border-collapse: collapse;
-    margin-top: 40px;
-  }
-  
-  /* .panelUser  th, td {
-    min-width: 18px;
-    padding: 3px;
-    font-size: 15px;
-    text-transform: none;
-    color: transparent;
-  } */
-  
-  .panelUser th {
-    background-color: #34495E;
-    color: #FFFFFF;
-    border: none;
-  }
-  
-  .panelUser tr td{
-    background-color: #ffffff;
-    color: #000000;
-    text-align: center;
-  }
-  
+}
 
+#tdUser{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#tdUser button {
+  margin: 5px;
+
+}

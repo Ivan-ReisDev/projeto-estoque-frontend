@@ -7,6 +7,7 @@ const PRD = 'https://backend-carropeca.vercel.app/api/'
 
 const UserContext = createContext('');
 
+
 const AuthContext = ({ children }) => {
     const navigate = useNavigate();
 
@@ -26,6 +27,9 @@ const AuthContext = ({ children }) => {
     const [profile, setProfile] = useState(dataUser || null);
 
     const [getUserAll, setGetUserAll] = useState([]);
+
+    const [selectUser, setSelectUser] = useState(null);
+    const [isModalOpenDeleteUser, setIsModalOpenDeleteUser] = useState(false)
 
     // Função para lidar com o envio do formulário de login
     const handleSubmitLogin = async (e) => {
@@ -159,7 +163,36 @@ const AuthContext = ({ children }) => {
         };
     }, [fetchDataAndSetData]);
 
+    const onClose = () => {
+        setSelectUser(null);
+        setIsModalOpenDeleteUser(false);
+    }
 
+    const handleDeleteUser = async (id) => {
+        try {
+            const res = await fetch(`${PRD}/user/delete/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const DataMSG = await res.json();
+
+            if (res.ok) {
+                fetchDataAndSetData();
+                setMessage(DataMSG.msg);
+                onClose()
+            } else {
+                setMessage(`Erro ao excluir usuário: ${DataMSG.msg}`);
+            }
+        } catch (error) {
+            console.error('Erro ao deletar usuário', error);
+        }
+    };
+
+//delete 
+    
     // Fornecimento do contexto para os componentes filhos
     return (
         <UserContext.Provider
@@ -174,6 +207,14 @@ const AuthContext = ({ children }) => {
                 profile,
                 getUsers,
                 getUserAll,
+                handleDeleteUser,
+                onClose,
+                setSelectUser,
+                selectUser,
+                isModalOpenDeleteUser,
+                setIsModalOpenDeleteUser
+
+
             }}
         >
             {children}

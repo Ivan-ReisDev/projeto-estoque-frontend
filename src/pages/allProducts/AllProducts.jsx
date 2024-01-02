@@ -51,7 +51,6 @@ const AllProducts = () => {
                 </div>
 
                  <div className='qtdItens'>
-                    <label htmlFor="qtdItens">Quantidade de itens</label>
                     <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))} placeholder='10'>
                     <option value="" disabled selected>Selecione...</option>
                     <option value={5}>5</option>
@@ -64,7 +63,7 @@ const AllProducts = () => {
                 </div> 
             
             </div>
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <th>Produto</th>
@@ -78,9 +77,8 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log(allProduct.length)}
                     {allProduct ?
-                        Array.isArray(allProduct) &&
+                        Array.isArray(currentItens.sort()) &&
                         currentItens.map((product) => (
                             <tr key={product._id} >
                                 <td>{product.nameProducts}</td>
