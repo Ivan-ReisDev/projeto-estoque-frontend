@@ -208,7 +208,7 @@ const AuthContext = ({ children }) => {
                 getUsers,
                 getUserAll,
                 handleDeleteUser,
-                onClose,
+                // onClose,
                 // setSelectUser,
                 // selectUser,
                 // isModalOpenDeleteUser,
