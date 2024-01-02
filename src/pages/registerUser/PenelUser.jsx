@@ -3,19 +3,16 @@ import { UserContext } from "../../Context/UserContext"
 import './style.css'
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 import { Table, Button } from 'react-bootstrap';
-import ModalUserDelete from "../../components/modalUserDelete/ModalUserDelete.Jsx";
+
 
 
 const PenelUser = () => {
 
-  const { profile, getUserAll, setSelectUser, selectUser, handleDeleteUser, isModalOpenDeleteUser, setIsModalOpenDeleteUser } = useContext(UserContext)
+  const { profile, getUserAll } = useContext(UserContext)
 
 
 
-  const openModal = (data) => {
-    setSelectUser(data);
-    setIsModalOpenDeleteUser(true);
-};
+
 
 
   return (
@@ -37,24 +34,12 @@ const PenelUser = () => {
                 <td>{user.user}</td>
                 <td>{user.email}</td>
                 <td id="tdUser"> {profile.userType === "Administrador" && <Button variant="primary"><IoSettings /></Button>}
-                     {profile.userType === "Administrador" && <Button variant="danger" onClick={() => openModal(user)}><IoTrashBin /></Button>} </td>
+                     {profile.userType === "Administrador" && <Button variant="danger"><IoTrashBin /></Button>} </td>
               </tr>
             )) : []}
       </tbody>
     </Table>
-     
-     {selectUser && (
-                <ModalUserDelete
-                    isOpen={isModalOpenDeleteUser}
-                    onClose={() => {
-                        setSelectedProducts(null);
-                        setIsModalOpenDeleteUser(false);
-                    }}
-                    user={selectUser}
-                    handleDeleteUser={handleDeleteUser}
-                />
-
-                )}
+                 
                 
     </div>
 
