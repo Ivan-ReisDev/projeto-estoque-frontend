@@ -6,7 +6,7 @@ const ModalUserDelete = ({ isOpen, onClose, user, handleDeleteUser }) => {
     
     return (
         <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto" className='modalDelete'>
-            <h2>Atenção!</h2>
+            {/* <h2>Atenção!</h2>
             {user && (
                 
                 <div className='container_modal container_modal_delete'>
@@ -16,7 +16,7 @@ const ModalUserDelete = ({ isOpen, onClose, user, handleDeleteUser }) => {
                         <button onClick={onClose}>X</button>
                     </div>
                 </div>
-            )}
+            )} */}
         </ReactModal>
     );
 
