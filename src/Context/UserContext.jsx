@@ -28,8 +28,8 @@ const AuthContext = ({ children }) => {
 
     const [getUserAll, setGetUserAll] = useState([]);
 
-    const [selectUser, setSelectUser] = useState(null);
-    const [isModalOpenDeleteUser, setIsModalOpenDeleteUser] = useState(false)
+    // const [selectUser, setSelectUser] = useState(null);
+    // const [isModalOpenDeleteUser, setIsModalOpenDeleteUser] = useState(false)
 
     // Função para lidar com o envio do formulário de login
     const handleSubmitLogin = async (e) => {
@@ -163,10 +163,10 @@ const AuthContext = ({ children }) => {
         };
     }, [fetchDataAndSetData]);
 
-    const onClose = () => {
-        setSelectUser(null);
-        setIsModalOpenDeleteUser(false);
-    }
+    // const onClose = () => {
+    //     setSelectUser(null);
+    //     setIsModalOpenDeleteUser(false);
+    // }
 
     const handleDeleteUser = async (id) => {
         try {
@@ -182,7 +182,7 @@ const AuthContext = ({ children }) => {
             if (res.ok) {
                 fetchDataAndSetData();
                 setMessage(DataMSG.msg);
-                onClose()
+                // onClose()
             } else {
                 setMessage(`Erro ao excluir usuário: ${DataMSG.msg}`);
             }
@@ -209,10 +209,10 @@ const AuthContext = ({ children }) => {
                 getUserAll,
                 handleDeleteUser,
                 onClose,
-                setSelectUser,
-                selectUser,
-                isModalOpenDeleteUser,
-                setIsModalOpenDeleteUser
+                // setSelectUser,
+                // selectUser,
+                // isModalOpenDeleteUser,
+                // setIsModalOpenDeleteUser,
 
 
             }}
