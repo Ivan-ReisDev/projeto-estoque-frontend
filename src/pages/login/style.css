@@ -24,7 +24,7 @@ p {
   height: 100vh;
   display: flex;
   flex-direction: row;
-  background-image: url('../../assets/backgroud.avif');
+  background-image: url('../../assets/backgroud.jpg');
   background-color: #474747;
   background-position: center;
   background-repeat: no-repeat;

@@ -80,7 +80,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="nameProducts"
                                 id="nameProducts"
-                                value={formUpdate.nameProducts.toUpperCase()}
+                                value={formUpdate.nameProducts}
                                 handleChange={handleChange}
                                 placeholder="Digite o nome do produto"
                                 required
@@ -90,7 +90,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                             <InputNew
                                 name="description"
                                 id="description"
-                                value={formUpdate.description.toUpperCase()}
+                                value={formUpdate.description}
                                 handleChange={handleChange}
                                 required
                             />
@@ -110,7 +110,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="codeSKU"
                                 id="codeSKU"
-                                value={formUpdate.codeSKU.toUpperCase()}
+                                value={formUpdate.codeSKU}
                                 handleChange={handleChange}
                                 required
                             />
@@ -132,7 +132,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="category"
                                 id="category"
-                                value={formUpdate.category.toUpperCase()}
+                                value={formUpdate.category}
                                 handleChange={handleChange}
                                 required
                             />
@@ -142,7 +142,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="mark"
                                 id="mark"
-                                handleChange={formUpdate.mark.toUpperCase()}
+                                handleChange={formUpdate.mark}
                                 onChange={handleChange}
                             />
                             <label htmlFor="price">Preço *</label>
@@ -165,7 +165,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="localization"
                                 id="localization"
-                                value={formUpdate.localization.toUpperCase()}
+                                value={formUpdate.localization}
                                 handleChange={handleChange}
                                 required
                             />

@@ -34,14 +34,14 @@ const AllProducts = () => {
         setIsModalOpenDelete(true);
         
     };
-
+    
     const [itensPerPages, setItensPerPages] = useState(20);
     const [currentPages, setCurrentPages] = useState(0)
     const pages = Math.ceil(allProduct.length / itensPerPages)
     const startIndex = currentPages * itensPerPages;
     const endIndex = startIndex + itensPerPages;
     const currentItens = allProduct.slice(startIndex, endIndex)
-    
+    console.log(allProduct)
     return (
         <div className='service-details'>
             <div className='seach'>
@@ -73,7 +73,7 @@ const AllProducts = () => {
                         <th>Estoque</th>
                         <th>Preço</th>
                         <th>Localização</th>
-                        <th></th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
