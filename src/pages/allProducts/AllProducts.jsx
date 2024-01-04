@@ -6,6 +6,7 @@ import { ContextProducts } from '../../Context/ProductsContext';
 import { UserContext } from '../../Context/UserContext';
 import { FaEye, FaSearch } from "react-icons/fa";
 import { IoSettings, IoTrashBin } from "react-icons/io5";
+import { Button, Table} from 'react-bootstrap';
 import './style.css'
 // import { CiSearch } from "react-icons/ci";
 
@@ -63,45 +64,63 @@ const AllProducts = () => {
                 </div> 
             
             </div>
-            <table >
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>SKU</th>
-                        <th>Estoque</th>
-                        <th>Preço</th>
-                        <th>Localização</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {allProduct ?
-                        Array.isArray(currentItens.sort()) &&
-                        currentItens.map((product) => (
-                            <tr key={product._id} >
-                                <td>{product.nameProducts}</td>
-                                <td>{product.description}</td>
-                                <td>{product.category}</td>
-                                <td>{product.codeSKU}</td>
-                                <td>{product.stock}</td>
-                                <td>R$ {product.price}</td>
-                                <td>{product.localization}</td>
-                                <td className='btn'>
-                                    <button className='btn-single btn-single-view' onClick={() => openModal(product)}><FaEye /></button>
-                                    {profile.userType === "Administrador" && <button className='btn-single' onClick={() => openModalUpdate(product)}><IoSettings /></button>}
-                                    {profile.userType === "Administrador" && <button className='btn-single btn-single-delete' onClick={() => openModalDelete(product)}><IoTrashBin /></button>}
-                                    {/* {profile.userType === "Admin" && <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}><IoTrashBin /></button>} */}
-
-                                </td>
-                            </tr>
-                        )) : []}
-                </tbody>
-                <div className='btnPagination'>{Array.from(Array(pages), (itens, index) =>{
-                return <button value={index} onClick={(e) => setCurrentPages(Number(e.target.value))}>{index + 1}</button>
-            })}</div>
-            </table>
+            <Table striped bordered hover >
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>SKU</th>
+            <th>Estoque</th>
+            <th>Preço</th>
+            <th>Localização</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allProduct &&
+            Array.isArray(currentItens.sort()) &&
+            currentItens.map((product) => (
+              <tr key={product._id}>
+                <td>{product.nameProducts}</td>
+                <td>{product.description}</td>
+                <td>{product.category}</td>
+                <td>{product.codeSKU}</td>
+                <td>{product.stock}</td>
+                <td>R$ {product.price}</td>
+                <td>{product.localization}</td>
+                <td className='btn'>
+                  <Button variant='success' onClick={() => openModal(product)}>
+                    <FaEye />
+                  </Button>
+                  {profile.userType === 'Administrador' && (
+                    <Button variant='secondary' onClick={() => openModalUpdate(product)}>
+                      <IoSettings />
+                    </Button>
+                  )}
+                  {profile.userType === 'Administrador' && (
+                    <Button variant='danger' onClick={() => openModalDelete(product)}>
+                      <IoTrashBin />
+                    </Button>
+                  )}
+                  {/* {profile.userType === 'Admin' && (
+                    <button className='btn-single btn-single-delete' onClick={() => handleDelete(product._id)}>
+                      <IoTrashBin />
+                    </button>
+                  )} */}
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      
+      <div className='btnPagination'>
+        {Array.from(Array(pages), (itens, index) => (
+          <Button key={index} value={index} onClick={(e) => setCurrentPages(Number(e.target.value))}>
+            {index + 1}
+          </Button>
+        ))}
+      </div>
 
             {selectedProducts && (
                 <Modal

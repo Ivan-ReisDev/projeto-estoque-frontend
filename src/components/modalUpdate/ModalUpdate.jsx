@@ -156,10 +156,6 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 required
                             />
 
-
-
-
-
                             <label htmlFor="localization">Localização *</label>
                             <InputNew
                                 type="text"

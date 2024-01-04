@@ -12,6 +12,7 @@
     width: 10%;
     border-collapse: collapse;
     margin-top: 10px;
+ 
   }
   
   .service-details  th, td {
@@ -22,6 +23,7 @@
     overflow: hidden;
     text-transform: uppercase; 
     color: transparent;
+    
     
   }
   
@@ -34,8 +36,7 @@
     
   }
 
-  
-  
+
   .service-details  tr td{
     background-color: #ffffff;
     color: #000000;
@@ -54,6 +55,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    top: 60px;
   }
 
   .service-details button {
@@ -68,25 +71,7 @@
   .btn {
     display: flex !important;
     flex-direction: row;
-
-  }
-
-  .btn-single {
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
-    border: none;
-
-  }
-
-  .btn-single-delete {
-    background-color: #ff0000;
-
-  }
-
-  .btn-single-view {
-    background-color: #008000 ;
-
+    margin: 2.5px;
   }
 
   .seach {

@@ -1,9 +1,9 @@
 .Home {
     width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 0;
 }
 
 .home-Principal {
@@ -16,13 +16,15 @@
     max-width: 1000px;
     background-color: #fff;
     box-shadow: 1px 1px 35px #bdbdbd9c;
+    position: absolute;
+    top: 80px;
 }
 
 .home-Principal  p {
     color: #000;
     font-size: 25px;
     padding: 0;
-    margin: 15px 0 1em 25px;
+
 }
 
 .services {

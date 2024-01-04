@@ -10,11 +10,6 @@ const PenelUser = () => {
 
   const { profile, getUserAll } = useContext(UserContext)
 
-
-
-
-
-
   return (
     <div className="panelUser">
 

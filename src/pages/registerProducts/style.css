@@ -2,8 +2,15 @@
     text-transform: uppercase;
 
 }
+
+.container_registerProduct {
+    position: absolute;
+    top: 60px;
+
+}
  
 .container_registerProduct, .container_registerProductTwo {
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
