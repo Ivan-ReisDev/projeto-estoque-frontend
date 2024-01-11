@@ -42,7 +42,7 @@ const AllProducts = () => {
     const startIndex = currentPages * itensPerPages;
     const endIndex = startIndex + itensPerPages;
     const currentItens = allProduct.slice(startIndex, endIndex)
-    console.log(allProduct)
+
     return (
         <div className='service-details'>
             <div className='seach'>

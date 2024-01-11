@@ -43,6 +43,7 @@ const ProductsContext = ({ children }) => {
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
 
+
     // Função para lidar com o envio do formulário de produtos
     const handleSubmitProducts = async (e) => {
         e.preventDefault();
@@ -61,11 +62,12 @@ const ProductsContext = ({ children }) => {
 
 
             const DataMSG = await res.json();
+            console.log(DataMSG);
             if (res.ok) {
                 fetchDataAndSetData();
                 setMessage(DataMSG.msg);
             } else {
-                setMessage(`Erro ao cadastrar produto: ${DataMSG.msg}`);
+                setMessage(DataMSG.msg);
             }
         } catch (error) {
             console.error('Erro ao criar produto', error);
@@ -120,10 +122,10 @@ const ProductsContext = ({ children }) => {
             }
         } catch (error) {
             console.error('Erro ao atualizar produto', error);
-                        };
+        };
     };
 
-   const onClose = () => {
+    const onClose = () => {
         setSelectedProducts(null);
         setIsModalOpen(false);
     }

@@ -1,19 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import InputNew from "../../components/input/InputNew";
 import "./style.css";
 import { ContextProducts } from "../../Context/ProductsContext";
 import PrimaryButton from "../../components/primaryButton/PrimaryButton";
 
 const RegisterProducts = () => {
-  const { formData, setFormData, handleSubmitProducts, message, setMessage } =
-    useContext(ContextProducts);
+  const { formData, setFormData, handleSubmitProducts, message, setMessage } = useContext(ContextProducts);
+
 
   const handleChange = (e) => {
-    setMessage('')
+    setMessage('');
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  
   return (
     <div className="container_registerProduct">
       <div className="container_registerProductTwo">
@@ -23,34 +23,34 @@ const RegisterProducts = () => {
             <div className="container_registerProduct-interno">
 
               <label htmlFor="nameProducts">Produto *</label>
-              <InputNew
+              <input
                 type="text"
                 name="nameProducts"
                 id="nameProducts"
                 value={formData.nameProducts}
-                // onChange={handleChange}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder={"Digite o nome do produto"}
                 required
               />
 
               <label htmlFor="description">Descrição *</label>
-              <InputNew
+              <input
                 name="description"
                 id="description"
                 value={formData.description}
-                handleChange={handleChange}
+                onChange={handleChange}
+
                 placeholder="Descrição do produto"
                 required
               />
 
               <label htmlFor="stock">Estoque *</label>
-              <InputNew
+              <input
                 type="number"
                 name="stock"
                 id="stock"
                 value={formData.stock}
-                handleChange={handleChange}
+                onChange={handleChange}
                 min='-1'
                 placeholder="Quantidade de produtos em estoque"
                 required
@@ -58,67 +58,68 @@ const RegisterProducts = () => {
 
 
               <label htmlFor="codeSKU">SKU *</label>
-              <InputNew
+              <input
                 type="text"
                 name="codeSKU"
                 id="codeSKU"
                 value={formData.codeSKU}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder="Código SKU (CP-6545)"
                 required
               />
 
               <label htmlFor="link">Link </label>
-              <InputNew
+              <input
                 type="url"
                 name="link"
                 id="link"
                 value={formData.link}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder="Digite o link do produto em sua loja"
               />
 
             </div>
             <div className="container_registerProduct-interno">
               <label htmlFor="category">Categoria *</label>
-              <InputNew
+              <input
                 type="text"
                 name="category"
                 id="category"
                 value={formData.category}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder="Informa a categoria do produto"
                 required
               />
 
               <label htmlFor="mark">Marca</label>
-              <InputNew
+              <input
                 type="text"
                 name="mark"
                 id="mark"
                 value={formData.mark}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder="Informe a marca do produto"
               />
               <label htmlFor="price">Preço *</label>
-              <InputNew
+              <input
                 type="number"
                 step="0.01"
                 name="price"
                 id="price"
                 value={formData.price}
-                min='-1'
-                handleChange={handleChange}
-                required={"required"}
+                min="-1"
+                onChange={handleChange}
+                required  // Remove the value assignme
               />
 
+
               <label htmlFor="localization">Localização *</label>
-              <InputNew
+              <input
                 type="text"
                 name="localization"
                 id="localization"
                 value={formData.localization}
-                handleChange={handleChange}
+                onChange={handleChange}
                 placeholder="Informe a localização do produto"
                 required
               />
