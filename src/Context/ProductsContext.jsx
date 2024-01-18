@@ -127,7 +127,7 @@ const ProductsContext = ({ children }) => {
 
     const onClose = () => {
         setSelectedProducts(null);
-        setIsModalOpen(false);
+        // setIsModalOpen(false);
     }
     // Função para excluir um produto
     const handleDelete = async (id) => {

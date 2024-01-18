@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext, useEffect } from "react";
 import ReactModal from "react-modal";
 import "./style.css";
@@ -37,19 +38,7 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
             price: price || 0,
             localization: localization || "",
         });
-    }, [
-        _id,
-        nameProducts,
-        description,
-        category,
-        link,
-        codeSKU,
-        mark,
-        stock,
-        price,
-        localization,
-        setFormUpdate,
-    ]);
+    }, [_id, nameProducts, description, category, link, codeSKU, mark, stock, price, localization, setFormUpdate, setMessage]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
