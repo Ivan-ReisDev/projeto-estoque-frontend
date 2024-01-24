@@ -10,12 +10,10 @@ const Modal = ({ isOpen, onClose, reserve }) => {
 
 
     const { formatarData } = useContext(UserContext)
-    const { createPDF } = useContext(ContextPdf)
 
     return (
         <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto">
             <h2>Detalhes do Produto</h2>
-            <button onClick={createPDF(reserve)}>Gerar PDF</button>
             {reserve && (
                 <div className='container_modal'>
 

@@ -3,10 +3,11 @@ import InputNew from "../../components/input/InputNew";
 import "./style.css";
 import { ContextProducts } from "../../Context/ProductsContext";
 import PrimaryButton from "../../components/primaryButton/PrimaryButton";
+import { ContextCategory } from "../../Context/CategoryContext";
 
 const RegisterProducts = () => {
   const { formData, setFormData, handleSubmitProducts, message, setMessage } = useContext(ContextProducts);
-
+  const { allCategory } = useContext(ContextCategory);
 
   const handleChange = (e) => {
     setMessage('');
@@ -81,15 +82,14 @@ const RegisterProducts = () => {
             </div>
             <div className="container_registerProduct-interno">
               <label htmlFor="category">Categoria *</label>
-              <input
-                type="text"
-                name="category"
-                id="category"
-                value={formData.category}
-                onChange={handleChange}
-                placeholder="Informa a categoria do produto"
-                required
-              />
+              <select name="category" id="categorySelect" onChange={handleChange} placeholder="Selecione a Categoria">
+                <option value="" disabled selected>Selecione...</option>
+                {allCategory &&                
+                  allCategory.map((category) => (
+                    <option key={category._id} value={category.category}>{category.category}</option>
+                ))}
+
+              </select>
 
               <label htmlFor="mark">Marca</label>
               <input
@@ -128,6 +128,7 @@ const RegisterProducts = () => {
           <PrimaryButton type='submit' value={'Registrar'} />
         </form>
         <p>{message}</p>
+        {console.log(allCategory)}
       </div>
     </div>
   );

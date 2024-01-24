@@ -18,6 +18,7 @@ const AllProducts = () => {
 
     const { allProduct, searchAllProducts, handleUpdateProducts, handleDelete, setMessage, selectedProducts, setSelectedProducts, isModalOpenDelete, setIsModalOpenDelete } = useContext(ContextProducts);
     const { profile } = useContext(UserContext);
+  
 
     const openModal = (data) => {
         setSelectedProducts(data);
@@ -108,6 +109,7 @@ const AllProducts = () => {
                       <IoTrashBin />
                     </button>
                   )} */}
+
                 </td>
               </tr>
             ))}

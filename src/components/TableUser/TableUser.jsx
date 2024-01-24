@@ -4,11 +4,8 @@ import './style.css'
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 import { Table, Button } from 'react-bootstrap';
 
-
-
-const PenelUser = () => {
-
-  const { profile, getUserAll } = useContext(UserContext)
+const TableUser = () => {
+    const { profile, getUserAll } = useContext(UserContext)
 
   return (
     <div className="panelUser">
@@ -18,7 +15,7 @@ const PenelUser = () => {
         <tr>
           <th>Usuário</th>
           <th>E-mail</th>
-          <th>Ação</th>
+          <th className="wAction">Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +25,7 @@ const PenelUser = () => {
               <tr key={user._id}>
                 <td>{user.user}</td>
                 <td>{user.email}</td>
-                <td id="tdUser"> {profile.userType === "Administrador" && <Button variant="primary"><IoSettings /></Button>}
+                <td className="wAction"  id="tdUser"> {profile.userType === "Administrador" && <Button variant="primary"><IoSettings /></Button>}
                      {profile.userType === "Administrador" && <Button variant="danger"><IoTrashBin /></Button>} </td>
               </tr>
             )) : []}
@@ -38,6 +35,7 @@ const PenelUser = () => {
                 
     </div>
 
-  )}
+  )
+}
 
-export default PenelUser
+export default TableUser

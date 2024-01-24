@@ -37,6 +37,8 @@ const PdfContext = ({ children }) => {
     };
 
 
+    
+
     // Fornecimento do contexto para os componentes filhos
     return (
         <ContextPdf.Provider
