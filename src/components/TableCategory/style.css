@@ -1,0 +1,35 @@
+.panelCategory {
+    display: flex;
+    margin-top: 1em;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  #tbUser {
+    width: 82%;
+  
+  }
+  
+  #tdUser{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  
+  #tdUser button {
+    margin: 5px;
+  
+  }
+  
+  .wAction {
+      width: 45px;
+  
+  }
+  
+  .panelCategory td, 
+  .panelCategory th{
+    border-left: none;
+    border-right: none;
+  
+  }

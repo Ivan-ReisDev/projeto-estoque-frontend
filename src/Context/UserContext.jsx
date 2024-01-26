@@ -7,9 +7,10 @@ const PRD = 'https://backend-carropeca.vercel.app/api/'
 
 const UserContext = createContext('');
 
-
 const AuthContext = ({ children }) => {
     const navigate = useNavigate();
+
+    const [statePage, setStatePage] = useState(1);
 
     // Obtém dados do usuário do armazenamento local
     const dataUser = localStorage.getItem('dataUser');
@@ -209,6 +210,8 @@ const AuthContext = ({ children }) => {
                 getUsers,
                 getUserAll,
                 handleDeleteUser,
+                statePage, 
+                setStatePage,
                 // onClose,
                 // setSelectUser,
                 // selectUser,

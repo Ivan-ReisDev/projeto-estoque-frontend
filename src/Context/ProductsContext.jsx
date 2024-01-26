@@ -41,6 +41,7 @@ const ProductsContext = ({ children }) => {
         price: 0.00,
         localization: '',
     });
+    
 
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
@@ -77,18 +78,6 @@ const ProductsContext = ({ children }) => {
             console.error('Erro ao criar produto', error);
         }
 
-        // Limpar o formulário
-        setFormData({
-            nameProducts: '',
-            description: '',
-            category: '',
-            link: '',
-            codeSKU: '',
-            mark: '',
-            stock: 0,
-            price: 0.00,
-            localization: '',
-        });
     };
 
 
@@ -204,6 +193,9 @@ const ProductsContext = ({ children }) => {
             clearInterval(refreshInterval);
         };
     }, [fetchDataAndSetData]);
+
+
+    
 
     // Função para barra de pesquisa dos produtos
     function searchAllProducts(e) {

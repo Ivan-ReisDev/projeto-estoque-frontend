@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import  { InfoPanelAdmin }  from '../../components/InfoPenalAdmin/InfoPanelAdmin'
 import './style.css'
+
 import  NavAdmin  from '../../components/NavAdmin/NavAdmin'
 import TableUser from '../../components/TableUser/TableUser'
+import { UserContext } from '../../Context/UserContext'
+import TableCategory from '../../components/TableCategory/TableCategory'
 
 const PanelAdmin = () => {
+  const { statePage } = useContext(UserContext)
+
   return (
     <div className='PanelAdmin flex flex-row '>
       <div className='w-2/6  flex flex-col'>
@@ -21,7 +26,8 @@ const PanelAdmin = () => {
           <InfoPanelAdmin />
         </div>
         <div>
-          <TableUser />
+            {statePage === 1 && <TableUser />}
+            {statePage === 2 && <TableCategory />}
         </div>
       </div>
     </div>

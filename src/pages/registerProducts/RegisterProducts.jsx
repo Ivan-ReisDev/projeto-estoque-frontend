@@ -2,18 +2,42 @@ import { useForm } from "react-hook-form";
 import PrimaryButton from "../../components/primaryButton/PrimaryButton";
 import { ContextCategory } from "../../Context/CategoryContext";
 import { useContext } from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ContextProducts } from "../../Context/ProductsContext";
 
 const RegisterProducts = () => {
 
+
+
   const { allCategory } = useContext(ContextCategory);
   const { handleSubmitProducts, message, setMessage } = useContext(ContextProducts);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+
+
+  const nameProducts = useRef(null);
+
+  useEffect(() => {
+    // Definir um temporizador para mudar a mensagem após 3 segundos
+    const time = setTimeout(() => {
+      setMessage('');
+    }, 5000);
+
+    // Limpando o temporizador ao desmontar o componente (componentWillUnmount)
+    return () => clearTimeout(time);
+  }, [message]);
 
   const onSubmit = (data) => {
     handleSubmitProducts(data);
-    data = ""
+    setValue("nameProducts", "")
+    setValue("description", "")
+    setValue("stock", "")
+    setValue("codeSKU", "")
+    setValue("link", "")
+    setValue("category", "")
+    setValue("localization", "")
+    setValue("price", "")
+    setValue("mark", "")
+    nameProducts.current.focus()
   };
   return (
     <div className="w-screen h-[85vh] flex items-start justify-center absolute top-20  ">
@@ -23,9 +47,10 @@ const RegisterProducts = () => {
           <div className=" flex flex-row justify-around h-full w-4/5	">
             <div className=" h-full flex flex-col justify-start w-[45%]">
 
-              <div >
+              <div onMouseOver={() => setMessage('')} >
                 <label htmlFor="nameProducts" className="m-0">Produto *</label>
                 <input
+                  ref={nameProducts}
                   type="text"
                   className={errors?.nameProducts?.type === "required" ? " h-9 w-full  border-1 px-2 py-1 rounded-md focus:outline-none border-rose-500" : "w-full border-1 h-9 border-gray-300 px-2 py-1 rounded-md focus:outline-none focus:border-blue-500"}
                   id="nameProducts"
@@ -141,7 +166,7 @@ const RegisterProducts = () => {
             </div>
 
           </div>
-          { message && <p>{message}</p>}
+          { message && <p className="text-cyan-950 ">{message}</p>}
           <PrimaryButton type='submit' value={"Enviar"} />
         </form>
       </div>
