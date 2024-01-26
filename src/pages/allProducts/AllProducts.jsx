@@ -90,12 +90,12 @@ const AllProducts = () => {
                 <td>{product.stock}</td>
                 <td>R$ {product.price}</td>
                 <td>{product.localization}</td>
-                <td className='btn'>
-                  <Button variant='success' onClick={() => openModal(product)}>
+                <td className='flex flex-row'>
+                  <Button variant='success' className='mr-1' onClick={() => openModal(product)}>
                     <FaEye />
                   </Button>
                   {profile.userType === 'Administrador' && (
-                    <Button variant='secondary' onClick={() => openModalUpdate(product)}>
+                    <Button variant='primary' className='mr-1' onClick={() => openModalUpdate(product)}>
                       <IoSettings />
                     </Button>
                   )}

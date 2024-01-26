@@ -26,3 +26,10 @@
     width: 45px;
 
 }
+
+.panelUser td, 
+.panelUser th{
+  border-left: none;
+  border-right: none;
+
+}

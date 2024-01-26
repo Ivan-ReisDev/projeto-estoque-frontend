@@ -53,6 +53,7 @@ const AuthContext = ({ children }) => {
             } else {
                 localStorage.removeItem('token');
                 localStorage.removeItem('dataUser');
+                
                 navigate('/');
             }
         } catch (error) {

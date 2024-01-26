@@ -31,7 +31,6 @@
 
 .ReactModal__Content h2 {
     color: #000000;
-    text-transform: uppercase;
     margin: 0;
 
 }
@@ -46,7 +45,6 @@
 
 .container_modal p {
     color: #000000;
-    text-transform: uppercase;
 }
 
 .container_modal button {

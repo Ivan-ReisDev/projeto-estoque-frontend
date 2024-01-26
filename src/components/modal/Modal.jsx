@@ -34,8 +34,6 @@ const Modal = ({ isOpen, onClose, reserve }) => {
                         <p><span className='itemProducts'>Localização:</span> {reserve.localization}</p>
                         <p><span className='itemProducts'>Descrição:</span> {reserve.description}</p>
                         <p><span className='itemProducts'>Atualização:</span> {formatarData(reserve.updatedAt)}</p>
-
-
                     </div>
 
                     <div className='close'>

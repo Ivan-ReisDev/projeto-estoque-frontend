@@ -28,6 +28,8 @@ const ProductsContext = ({ children }) => {
         price: 0.00,
         localization: '',
     });
+
+ 
     const [formUpdate, setFormUpdate] = useState({
         nameProducts: '',
         description: '',
@@ -46,20 +48,22 @@ const ProductsContext = ({ children }) => {
 
     // Função para lidar com o envio do formulário de produtos
     const handleSubmitProducts = async (e) => {
-        e.preventDefault();
+        
         try {
+            
             const res = await fetch(`${PRD}create/products`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    formData: formData,
+                    formData: e,
                     idUser: profile._id,
                     nameUser: profile.user,
                 }),
             });
-
+            
+            console.log(res)
 
             const DataMSG = await res.json();
             console.log(DataMSG);

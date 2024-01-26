@@ -34,7 +34,7 @@ const Login = () => {
             onChange={(e) => setDataLogin({ ...dataLogin, email: e.target.value })} />
 
           <label htmlFor="password">Senha</label>
-          <input className='inputEntry'
+          <input className='inputEntry '
             type="password"
             name='password'
             id='password'

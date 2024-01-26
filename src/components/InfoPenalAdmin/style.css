@@ -9,7 +9,7 @@
 .InfoPanelAdminHeader {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     width: 100%;
     height: 30px;
     background-color: #34495E;
