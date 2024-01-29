@@ -50,7 +50,7 @@ const RegisterProducts = () => {
               <div onMouseOver={() => setMessage('')} >
                 <label htmlFor="nameProducts" className="m-0">Produto *</label>
                 <input
-                  ref={nameProducts}
+             
                   type="text"
                   className={errors?.nameProducts?.type === "required" ? " h-9 w-full  border-1 px-2 py-1 rounded-md focus:outline-none border-rose-500" : "w-full border-1 h-9 border-gray-300 px-2 py-1 rounded-md focus:outline-none focus:border-blue-500"}
                   id="nameProducts"

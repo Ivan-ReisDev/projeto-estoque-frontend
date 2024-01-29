@@ -12,7 +12,7 @@ const PanelAdmin = () => {
 
   return (
     <div className='PanelAdmin flex flex-row '>
-      <div className='w-2/6  flex flex-col'>
+      <div className='w-2/6 flex flex-col'>
         <div className='w-full flex items-center justify-center'>
           <NavAdmin />
         </div>

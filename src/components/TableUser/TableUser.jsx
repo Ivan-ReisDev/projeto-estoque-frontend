@@ -10,7 +10,9 @@ const TableUser = () => {
   return (
     <div className="panelUser">
 
-<Table striped bordered hover id="tbUser">
+      <button>teste</button>
+
+<Table striped bordered hover id="tbUser" >
       <thead>
         <tr>
           <th>Usuário</th>

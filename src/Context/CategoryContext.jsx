@@ -11,16 +11,19 @@ const ContextCategory = createContext('');
 
 const CategoryContext = ({ children }) => {
     const { profile, tokenUser } = useContext(UserContext);
-    const [ allCategory, setAllCategory] = useState([])
-    const [ message, setMessage] = useState('')
+    const [allCategory, setAllCategory] = useState([])
+    const [message, setMessage] = useState('')
 
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [isModalOpenCategory, setIsModalOpenCategory] = useState(false)
+    const [isModalOpenCategoryDelete, setIsModalOpenCategoryDelete] = useState(false)
 
     const getCategory = async () => {
         try {
             const res = await fetch(`${PRD}get/category`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${tokenUser}`,  
+                    Authorization: `Bearer ${tokenUser}`,
                 },
             });
 
@@ -30,15 +33,84 @@ const CategoryContext = ({ children }) => {
 
         } catch (error) {
             setMessage(error);
-
         }
 
     }
 
+    const handleSubmitCategory = async (data) => {
+        try {
+
+            const res = await fetch(`${PRD}create/category`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    formdata: data,
+                })
+            });
+            console.log(res)
+            const DataMSG = await res.json();
+            console.log(DataMSG);
+
+            if (res.ok) {
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
+            }
+
+
+        } catch (error) {
+            console.error('Erro ao criar produto', error);
+        }
+
+    };
+    // /delete/category/
+
+    const handleDeleteCategory = async (id) => {
+        try {
+            const res = await fetch(`${PRD}delete/category/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const DataMSG = await res.json();
+
+            if (res.ok) {
+                setMessage(DataMSG.msg);
+                onClose()
+            } else {
+                setMessage(`Erro ao excluir categoria: ${DataMSG.msg}`);
+            }
+        } catch (error) {
+            console.error('Erro ao deletar categora', error);
+        }
+    };
+
+
+
+
+    const onClose = () => {
+        setSelectedCategory(null);
+
+        useEffect(() => {
+            // Definir um temporizador para mudar a mensagem após 3 segundos
+            const time = setTimeout(() => {
+                setMessage('');
+            }, 5000);
+            // Limpando o temporizador ao desmontar o componente (componentWillUnmount)
+            return () => clearTimeout(time);
+        }, [message]);
+        // setIsModalOpen(false);
+    }
+
+
     useEffect(() => {
         getCategory();
-    }, [setAllCategory, tokenUser]);
-    
+    }, [setAllCategory, tokenUser, handleSubmitCategory]);
+
     // Fornecimento do contexto para os componentes filhos
     return (
         <ContextCategory.Provider
@@ -46,7 +118,15 @@ const CategoryContext = ({ children }) => {
                 getCategory,
                 allCategory,
                 message,
-                setMessage
+                setMessage,
+                selectedCategory,
+                setSelectedCategory,
+                isModalOpenCategory,
+                setIsModalOpenCategory,
+                handleSubmitCategory,
+                isModalOpenCategoryDelete,
+                setIsModalOpenCategoryDelete,
+                handleDeleteCategory
             }}
         >
             {children}
