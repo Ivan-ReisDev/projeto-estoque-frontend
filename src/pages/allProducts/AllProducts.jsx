@@ -131,7 +131,7 @@ const AllProducts = () => {
                     setIsModalOpen(false);
                 }}
                     isOpen={isModalOpen}
-                    reserve={selectedProducts}
+                    product={selectedProducts}
                 />
             )}
 

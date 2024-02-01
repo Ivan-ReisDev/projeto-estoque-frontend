@@ -4,17 +4,6 @@ import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
 import { ContextCategory } from '../../Context/CategoryContext';
 const ModalCategoryDelete = ({ isOpen, onClose, category, handleDeleteCategory }) => {
-    const { message, setMessage } = useContext(ContextCategory);
-
-    // useEffect(() => {
-    //     // Definir um temporizador para mudar a mensagem após 3 segundos
-    //     const time = setTimeout(() => {
-    //       setMessage('');
-    //     }, 5000);
-    //     // Limpando o temporizador ao desmontar o componente (componentWillUnmount)
-    //     return () => clearTimeout(time);
-    //   }, [message]);
-
 
     return (
         <>
@@ -30,7 +19,6 @@ const ModalCategoryDelete = ({ isOpen, onClose, category, handleDeleteCategory }
                     <Button className='m-2' variant="danger" onClick={onClose}> Cancelar </Button>
                 </div>
             </Modal>
-
         </>
     )
 }

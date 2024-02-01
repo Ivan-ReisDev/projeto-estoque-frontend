@@ -35,6 +35,7 @@ const Login = () => {
 
           <label htmlFor="password">Senha</label>
           <input className='inputEntry '
+            autoComplete='"current-password"'
             type="password"
             name='password'
             id='password'

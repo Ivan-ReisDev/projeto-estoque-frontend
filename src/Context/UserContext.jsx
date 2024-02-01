@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 // const API = 'http://localhost:3000/api/';
-const PRD = 'https://backend-carropeca.vercel.app/api/'
+const PRD = 'http://localhost:3000/api/'
 
 const UserContext = createContext('');
 
 const AuthContext = ({ children }) => {
+
+
+    const [selectedUser, setSelecteUser] = useState(null);
+    const [isModalOpenUser, setIsModalOpenUser] = useState(false)
+
     const navigate = useNavigate();
 
     const [statePage, setStatePage] = useState(1);
@@ -54,7 +59,6 @@ const AuthContext = ({ children }) => {
             } else {
                 localStorage.removeItem('token');
                 localStorage.removeItem('dataUser');
-                
                 navigate('/');
             }
         } catch (error) {
@@ -193,6 +197,35 @@ const AuthContext = ({ children }) => {
         }
     };
 
+    const handleSubmitUser = async (data) => {
+        try {
+
+            const res = await fetch(`${PRD}register/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    formdata: data
+                })
+            });
+            console.log(res)
+            const DataMSG = await res.json();
+            console.log(DataMSG);
+
+            if (res.ok) {
+                setMessage(DataMSG.msg);
+            } else {
+                setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
+            }
+
+
+        } catch (error) {
+            console.error('Erro ao criar produto', error);
+        }
+
+    };
+
 //delete 
     
     // Fornecimento do contexto para os componentes filhos
@@ -212,6 +245,11 @@ const AuthContext = ({ children }) => {
                 handleDeleteUser,
                 statePage, 
                 setStatePage,
+                isModalOpenUser, 
+                setIsModalOpenUser,
+                selectedUser, 
+                setSelecteUser,
+                handleSubmitUser,
                 // onClose,
                 // setSelectUser,
                 // selectUser,

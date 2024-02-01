@@ -3,14 +3,17 @@ import { UserContext } from "../../Context/UserContext"
 import './style.css'
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 import { Table, Button } from 'react-bootstrap';
+import ModalCreateUser from "../ModalCreateUser/ModalCreateUser";
 
 const TableUser = () => {
-    const { profile, getUserAll } = useContext(UserContext)
+    const { profile, getUserAll, handleDeleteUser, isModalOpenUser,  setIsModalOpenUser, selectedUser, setSelecteUser  } = useContext(UserContext)
 
   return (
     <div className="panelUser">
 
-      <button>teste</button>
+<div className='w-full flex items-center justify-center h-[40px] mb-2'>
+        <Button variant="outline-primary" onClick={() => setIsModalOpenUser(true)}>Novo usuário</Button>
+      </div>
 
 <Table striped bordered hover id="tbUser" >
       <thead>
@@ -34,7 +37,16 @@ const TableUser = () => {
       </tbody>
     </Table>
                  
-                
+    {(
+        <ModalCreateUser
+          onClose={() => {
+            setSelecteUser(null);
+            setIsModalOpenUser(false);
+          }}
+          isOpen={isModalOpenUser}
+
+        />
+      )}    
     </div>
 
   )

@@ -6,7 +6,7 @@ import './style.css'
 import { ContextPdf } from '../../Context/PdfContext';
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, reserve }) => {
+const Modal = ({ isOpen, onClose, product }) => {
 
 
     const { formatarData } = useContext(UserContext)
@@ -14,28 +14,25 @@ const Modal = ({ isOpen, onClose, reserve }) => {
     return (
         <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto">
             <h2>Detalhes do Produto</h2>
-            {reserve && (
+            {product && (
                 <div className='container_modal'>
-
-
-                    <div className='content_Modal'>
-                        <p><span className='itemProducts'>Produto:</span> {reserve.nameProducts}</p>
-                        <p><span className='itemProducts'>SKU:</span> {reserve.codeSKU}</p>
-                        <p><span className='itemProducts'>Criação:</span> {formatarData(reserve.createdAt)}</p>
-                        <p><span className='itemProducts'>Preço:</span> R$ {reserve.price}</p>
-                        <p><span className='itemProducts'>Link:</span> <a href={reserve.link} target='_blank' rel="noreferrer" >{reserve.link}</a></p>
-                        <p><span className='itemProducts'>Usuario:</span> {reserve.nameUser}</p>
-               
-                    </div>
-                    <div className='content_Modal'>
-                        <p><span className='itemProducts'>Categoria:</span> {reserve.category}</p>
-                        <p><span className='itemProducts'>Estoque:</span> {reserve.stock}</p>
-                        <p><span className='itemProducts'>Marca:</span> {reserve.mark}</p>
-                        <p><span className='itemProducts'>Localização:</span> {reserve.localization}</p>
-                        <p><span className='itemProducts'>Descrição:</span> {reserve.description}</p>
-                        <p><span className='itemProducts'>Atualização:</span> {formatarData(reserve.updatedAt)}</p>
+                    <div>
+                        <p><span className=''>Produto:</span> {product.nameProducts}</p>
+                        <p><span className=''>SKU:</span> {product.codeSKU}</p>
+                        <p><span className=''>Criação:</span> {formatarData(product.createdAt)}</p>
+                        <p><span className=''>Preço:</span> R$ {product.price}</p>
+                        <p><span className=''>Link:</span> <a href={product.link} target='_blank' rel="noreferrer" >{product.link}</a></p>
+                        <p><span className=''>Usuario:</span> {product.nameUser}</p>
                     </div>
 
+                    <div >
+                        <p><span className=''>Categoria:</span> {product.category}</p>
+                        <p><span className=''>Estoque:</span> {product.stock}</p>
+                        <p><span className=''>Marca:</span> {product.mark}</p>
+                        <p><span className=''>Localização:</span> {product.localization}</p>
+                        <p><span className=''>Descrição:</span> {product.description}</p>
+                        <p><span className=''>Atualização:</span> {formatarData(product.updatedAt)}</p>
+                    </div>
                     <div className='close'>
                         <button onClick={onClose}>X</button>
                     </div>

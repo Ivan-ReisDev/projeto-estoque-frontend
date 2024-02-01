@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { ContextCategory } from '../../Context/CategoryContext';
 import { UserContext } from '../../Context/UserContext';
-import { IoSettings, IoTrashBin } from "react-icons/io5";
+import { IoTrashBin } from "react-icons/io5";
 import { Table, Button } from 'react-bootstrap';
 import './style.css'
 import ModalCategory from '../ModalCategory/ModalCategory';
@@ -35,8 +35,7 @@ const TableCategory = () => {
             allCategory.map((category) => (
               <tr key={category._id}>
                 <td>{category.category}</td>
-                <td className="wAction" id="tdUser"> {profile.userType === "Administrador" && <Button variant="primary"><IoSettings /></Button>}
-                  {profile.userType === "Administrador" && <Button onClick={() => openModalDelete(category)} variant="danger"><IoTrashBin /></Button>} </td>
+                <td className="wAction" id="tdUser">  {profile.userType === "Administrador" && <Button onClick={() => openModalDelete(category)} variant="danger"><IoTrashBin /></Button>} </td>
               </tr>
             )) : []}
         </tbody>

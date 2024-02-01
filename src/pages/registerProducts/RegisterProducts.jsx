@@ -6,9 +6,6 @@ import { useState, useEffect, useRef } from "react";
 import { ContextProducts } from "../../Context/ProductsContext";
 
 const RegisterProducts = () => {
-
-
-
   const { allCategory } = useContext(ContextCategory);
   const { handleSubmitProducts, message, setMessage } = useContext(ContextProducts);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -37,7 +34,6 @@ const RegisterProducts = () => {
     setValue("localization", "")
     setValue("price", "")
     setValue("mark", "")
-    nameProducts.current.focus()
   };
   return (
     <div className="w-screen h-[85vh] flex items-start justify-center absolute top-20  ">
