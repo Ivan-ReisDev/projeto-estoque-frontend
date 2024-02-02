@@ -55,6 +55,7 @@ const CategoryContext = ({ children }) => {
 
             if (res.ok) {
                 setMessage(DataMSG.msg);
+                getCategory();
             } else {
                 setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
             }
@@ -109,7 +110,7 @@ const CategoryContext = ({ children }) => {
 
     useEffect(() => {
         getCategory();
-    }, [setAllCategory, tokenUser, handleSubmitCategory]);
+    }, []);
 
     // Fornecimento do contexto para os componentes filhos
     return (

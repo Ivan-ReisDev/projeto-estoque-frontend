@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { ContextCategory } from '../../Context/CategoryContext';
 const ModalCategory = ({ isOpen, onClose }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const { handleSubmitCategory, message, setMessage } = useContext(ContextCategory);
+    const { handleSubmitCategory, message, setMessage, } = useContext(ContextCategory);
 
 
     useEffect(() => {

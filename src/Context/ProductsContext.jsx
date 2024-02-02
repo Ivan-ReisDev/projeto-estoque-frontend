@@ -29,7 +29,7 @@ const ProductsContext = ({ children }) => {
         localization: '',
     });
 
- 
+
     const [formUpdate, setFormUpdate] = useState({
         nameProducts: '',
         description: '',
@@ -41,7 +41,7 @@ const ProductsContext = ({ children }) => {
         price: 0.00,
         localization: '',
     });
-    
+
 
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
@@ -49,9 +49,9 @@ const ProductsContext = ({ children }) => {
 
     // Função para lidar com o envio do formulário de produtos
     const handleSubmitProducts = async (e) => {
-        
+
         try {
-            
+
             const res = await fetch(`${PRD}create/products`, {
                 method: 'POST',
                 headers: {
@@ -63,7 +63,7 @@ const ProductsContext = ({ children }) => {
                     nameUser: profile.user,
                 }),
             });
-            
+
             console.log(res)
 
             const DataMSG = await res.json();
@@ -195,7 +195,7 @@ const ProductsContext = ({ children }) => {
     }, [fetchDataAndSetData]);
 
 
-    
+
 
     // Função para barra de pesquisa dos produtos
     function searchAllProducts(e) {
@@ -213,10 +213,9 @@ const ProductsContext = ({ children }) => {
                 const regex = new RegExp(`\\b${termSearch}.*`, 'i');
                 return regex.test(nameProductRemoveACcent);
             });
-
             setAllProduct(resultProduct);
         }
-
+        
     }
 
     // Efeito para obter todos os produtos ao carregar a página
