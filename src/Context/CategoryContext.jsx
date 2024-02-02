@@ -81,7 +81,8 @@ const CategoryContext = ({ children }) => {
 
             if (res.ok) {
                 setMessage(DataMSG.msg);
-                onClose()
+                getCategory();
+                onClose();
             } else {
                 setMessage(`Erro ao excluir categoria: ${DataMSG.msg}`);
             }
