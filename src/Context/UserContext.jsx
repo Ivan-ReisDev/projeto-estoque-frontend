@@ -12,6 +12,7 @@ const AuthContext = ({ children }) => {
 
     const [selectedUser, setSelecteUser] = useState(null);
     const [isModalOpenUser, setIsModalOpenUser] = useState(false)
+    const [isModalOpenUserDelete, setIsModalOpenUserDelete] = useState(false)
 
     const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const AuthContext = ({ children }) => {
     });
 
     // Estado para mensagens de resposta
-    const [message, setMessage] = useState('');
+    const [message, setMessage]  = useState('');
     const [tokenUser, setTokenUser] = useState('');
 
     const [profile, setProfile] = useState(dataUser || null);
@@ -38,6 +39,11 @@ const AuthContext = ({ children }) => {
     // const [isModalOpenDeleteUser, setIsModalOpenDeleteUser] = useState(false)
 
     // Função para lidar com o envio do formulário de login
+
+
+
+
+
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
 
@@ -176,7 +182,7 @@ const AuthContext = ({ children }) => {
 
     const handleDeleteUser = async (id) => {
         try {
-            const res = await fetch(`${PRD}/user/delete/${id}`, {
+            const res = await fetch(`${PRD}user/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -199,7 +205,6 @@ const AuthContext = ({ children }) => {
 
     const handleSubmitUser = async (data) => {
         try {
-
             const res = await fetch(`${PRD}register/`, {
                 method: 'POST',
                 headers: {
@@ -209,21 +214,22 @@ const AuthContext = ({ children }) => {
                     formdata: data
                 })
             });
-            console.log(res)
-            const DataMSG = await res.json();
-            console.log(DataMSG);
-
+    
+            console.log(res);
+    
             if (res.ok) {
+                const DataMSG = await res.json();
+                console.log(DataMSG);
                 setMessage(DataMSG.msg);
             } else {
-                setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
+                const errorData = await res.json().catch(() => null); // Tentar analisar o corpo da resposta como JSON
+                const errorMessage = errorData ? errorData.msg : 'Erro desconhecido';
+                setMessage(`Erro ao cadastrar categoria: ${errorMessage}`);
             }
-
-
+    
         } catch (error) {
             console.error('Erro ao criar produto', error);
         }
-
     };
 
 //delete 
@@ -250,6 +256,8 @@ const AuthContext = ({ children }) => {
                 selectedUser, 
                 setSelecteUser,
                 handleSubmitUser,
+                isModalOpenUserDelete, 
+                setIsModalOpenUserDelete,
                 // onClose,
                 // setSelectUser,
                 // selectUser,

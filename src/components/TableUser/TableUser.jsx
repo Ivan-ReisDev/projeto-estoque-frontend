@@ -4,9 +4,19 @@ import './style.css'
 import { IoSettings, IoTrashBin } from "react-icons/io5";
 import { Table, Button } from 'react-bootstrap';
 import ModalCreateUser from "../ModalCreateUser/ModalCreateUser";
+import ModalDeleteUser from "../ModalDeleteUser/ModalDeleteUser";
 
 const TableUser = () => {
-  const { profile, getUserAll, handleDeleteUser, isModalOpenUser, setIsModalOpenUser, selectedUser, setSelecteUser } = useContext(UserContext)
+  const { profile, getUserAll, isModalOpenUser, setIsModalOpenUser,  setSelecteUser, selectedUser, isModalOpenUserDelete, setIsModalOpenUserDelete } = useContext(UserContext)
+
+  const openModalDeleteUser = (data) => {
+    console.log(data)
+    setSelecteUser(data)
+    setIsModalOpenUserDelete(true);
+    
+  }
+
+
 
   return (
     <div className="panelUser">
@@ -31,7 +41,7 @@ const TableUser = () => {
                 <td>{user.user}</td>
                 <td>{user.email}</td>
                 <td className="wAction" id="tdUser"> {profile.userType === "Administrador" && <Button variant="primary"><IoSettings /></Button>}
-                  {profile.userType === "Administrador" && <Button variant="danger"><IoTrashBin /></Button>} </td>
+                  {profile.userType === "Administrador" && <Button variant="danger"  onClick={() => openModalDeleteUser(user)} ><IoTrashBin /></Button>} </td>
               </tr>
             )) : []}
         </tbody>
@@ -47,6 +57,19 @@ const TableUser = () => {
 
         />
       )}
+
+
+{selectedUser && (
+                <ModalDeleteUser
+                    isOpen={isModalOpenUserDelete}
+                    onClose={() => {
+                      setSelecteUser(null);
+                      setIsModalOpenUserDelete(false);
+                    }}
+                    user={selectedUser}
+                />
+            )}
+
     </div>
 
   )

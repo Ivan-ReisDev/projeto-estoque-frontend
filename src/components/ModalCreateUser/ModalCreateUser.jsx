@@ -1,29 +1,48 @@
 import ReactModal from 'react-modal';
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { UserContext } from '../../Context/UserContext';
 import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import './style.css'
+import { useEffect } from 'react';
 // eslint-disable-next-line react/prop-types
-const ModalCreateUser = ({ isOpen, onClose, user, handleDeleteUser }) => {
-    const { message, setMessege, handleSubmitUser } = useContext(UserContext)
+const ModalCreateUser = ({ isOpen, onClose,  }) => {
+    const { message, setMessage, handleSubmitUser } = useContext(UserContext);
+
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
+
+
+
 
     const onSubmit = (data) => {
         handleSubmitUser(data);
         setValue("user", "")
-        console.log(`Estou aqui` + data)
+        setValue("email", "")
+        setValue("password", "")
+        setValue("passwordConf", "")
+        setValue("userType", "Usuário")
+
+        useEffect(() => {
+            // Definir um temporizador para mudar a mensagem após 3 segundos
+          setTimeout(() => {
+              setMessage('');
+            }, 5000);
+    
+          }, [message]);
+
+
     };
 
     const watchPassword = watch("password")
     return (
-        <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto" className='modalCreateUser' >
+        <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto" className='modalCreateUser'>
+    
             <div className='border-b-2 w-full h-{20%}'>
                 <h2 className=' text-xl m-2 '>Registrar novo usuário</h2>
             </div>
 
             <div className='w-full flex flex-col items-center justify-center'>
-                <form className='w-full h-{100%} ' onSubmit={handleSubmit(onSubmit)}>
+                <form className='w-full h-{100%}' onSubmit={handleSubmit(onSubmit)}>
                     <div className='my-2 pb-2'>
                         <label htmlFor="user" className="m-0">Usuário *</label>
                         <input
@@ -33,7 +52,7 @@ const ModalCreateUser = ({ isOpen, onClose, user, handleDeleteUser }) => {
                             placeholder={"Digite um nome de usuário..."}
                             {...register("user", { required: true })}
                         />
-                        {errors?.user && <p className="text-xs p-0 m-0 text-red-500 ">Adicione o nome de usuário.</p>}
+                         {errors?.user && <p className="text-xs p-0 m-0 text-red-500 ">Adicione o nome de usuário.</p>}
                     </div>
 
                     <div className='my-2 pb-2'>
@@ -46,7 +65,7 @@ const ModalCreateUser = ({ isOpen, onClose, user, handleDeleteUser }) => {
                             placeholder={"Digite um e-mail..."}
                             {...register("email", { required: true })}
                         />
-                        {errors?.email && <p className="text-xs p-0 m-0 text-red-500">Adicione um endereço de e-mail.</p>}
+                         {errors?.email && <p className="text-xs p-0 m-0 text-red-500">Adicione um endereço de e-mail.</p>} 
                     </div>
 
                     <div className='my-2 pb-2'>
@@ -80,7 +99,7 @@ const ModalCreateUser = ({ isOpen, onClose, user, handleDeleteUser }) => {
                                 validate: (value) => value === watchPassword
                             })}
                         />
-                        {errors?.passwordConf && <p className=" text-xs p-0 m-0  text-red-500 ">As senhas digitadas não coincidem.</p>}
+                         {errors?.passwordConf && <p className=" text-xs p-0 m-0  text-red-500 ">As senhas digitadas não coincidem.</p>} 
                     </div>
 
 
@@ -95,9 +114,10 @@ const ModalCreateUser = ({ isOpen, onClose, user, handleDeleteUser }) => {
                             <option value="Moderador">Moderador</option>
                             <option value="Administrador">Administrador</option>
                         </select>
-                        {errors?.userType && <p className="text-xs p-0 m-0 text-red-500">As senhas digitadas não coincidem.</p>}
+                         {errors?.userType && <p className="text-xs p-0 m-0 text-red-500">As senhas digitadas não coincidem.</p>}
                     </div>
-                    {message && <p className=' text-center text-zinc-800 '>{message}</p>}
+                    {message && typeof message === 'string' && <p className='text-center text-zinc-800'>{message}</p>}
+
                     <div className=' h-{20%} flex flex-row items-center justify-end border-t-2 w-full'>
                         <Button type='submit' className='m-2' variant='primary'> Cadastrar </Button>
                         <Button className='m-2' variant="danger" onClick={onClose}> Cancelar </Button>

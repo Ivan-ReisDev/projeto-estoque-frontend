@@ -11,8 +11,6 @@ const RegisterProducts = () => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
 
-  const nameProducts = useRef(null);
-
   useEffect(() => {
     // Definir um temporizador para mudar a mensagem após 3 segundos
     const time = setTimeout(() => {
