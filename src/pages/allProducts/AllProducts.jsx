@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Modal from '../../components/modal/Modal'
 import ModalUpdate from '../../components/modalUpdate/ModalUpdate';
 import ModalDelete from '../../components/modalDelete/ModalDelete'
@@ -44,6 +44,11 @@ const AllProducts = () => {
     const endIndex = startIndex + itensPerPages;
     const currentItens = allProduct.slice(startIndex, endIndex)
 
+    useEffect(() => {
+      searchAllProducts()
+
+    }, [])
+
     return (
         <div className='service-details'>
             <div className='seach'>
@@ -53,8 +58,9 @@ const AllProducts = () => {
                 </div>
 
                  <div className='qtdItens'>
-                    <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))} placeholder='10'>
-                    <option value="" disabled selected>Selecione...</option>
+                    <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))} placeholder='10'
+                    >
+                    <option value="">Selecione...</option>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={15}>15</option>

@@ -69,7 +69,7 @@ const ProductsContext = ({ children }) => {
             const DataMSG = await res.json();
             console.log(DataMSG);
             if (res.ok) {
-                fetchDataAndSetData();
+                searchAllProducts()
                 setMessage(DataMSG.msg);
             } else {
                 setMessage(DataMSG.msg);
@@ -108,7 +108,7 @@ const ProductsContext = ({ children }) => {
             const DataMSG = await res.json();
 
             if (res.ok) {
-                fetchDataAndSetData();
+                searchAllProducts()
                 setMessage(DataMSG.msg);
             } else {
                 setMessage(`Erro ao atualizar produto: ${DataMSG.msg}`);
@@ -135,7 +135,7 @@ const ProductsContext = ({ children }) => {
             const DataMSG = await res.json();
 
             if (res.ok) {
-                fetchDataAndSetData();
+                searchAllProducts()
                 setMessage(DataMSG.msg);
                 onClose()
             } else {
@@ -163,65 +163,26 @@ const ProductsContext = ({ children }) => {
     };
 
 
-    const fetchDataAndSetData = useCallback(async () => {
-        try {
-            const result = await getProductsAll();
-
-            if (result) {
-                localStorage.setItem('produtos', JSON.stringify(result));
-            }
-
-        } catch (error) {
-            setMessage("Ocorreu um erro, tente novamente mais tarde");
-        }
-    }, []);
-
-
-    useEffect(() => {
-        // Check if cached data exists
-        const cachedData = localStorage.getItem(('produtos'));
-        if (cachedData) {
-            setAllProduct(JSON.parse(cachedData));
-        }
-
-        // Fetch new data
-        fetchDataAndSetData();
-
-        const refreshInterval = setInterval(fetchDataAndSetData, 1 * 60 * 1000);
-
-        return () => {
-            clearInterval(refreshInterval);
-        };
-    }, [fetchDataAndSetData]);
-
-
-
-
     // Função para barra de pesquisa dos produtos
-    function searchAllProducts(e) {
-        const value = e.target.value.trim().toLowerCase();
+    const searchAllProducts = async (products) => {
+        try {
+            const value = products ? products.target.value : '';
 
-        if (value === '') {
-            // Se a string de pesquisa estiver vazia, recarregue todos os produtos da API
-            getProductsAll();
-        } else {
-            const resultProduct = allProduct.filter((products) => {
-                const termSearch = removeAccents(value.replace(/\s+/g, '.*\\b'));
-                const nameProductRemoveACcent = removeAccents(
-                    products.nameProducts.toLowerCase()
-                );
-                const regex = new RegExp(`\\b${termSearch}.*`, 'i');
-                return regex.test(nameProductRemoveACcent);
+            const res = await fetch(`${PRD}search?nameProducts=${value}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenUser}`,
+                },
             });
-            setAllProduct(resultProduct);
+            const data = await res.json();
+            console.log('data' + data)
+            setAllProduct(data); // Atualize o estado local com os novos dados
+            return data;
+        } catch (error) {
+            setMessage(error);
         }
-        
-    }
 
-    // Efeito para obter todos os produtos ao carregar a página
-    useEffect(() => {
-        getProductsAll();
-    }, [setAllProduct, tokenUser]);
+    }
 
     // Fornecimento do contexto para os componentes filhos
     return (
@@ -238,7 +199,6 @@ const ProductsContext = ({ children }) => {
                 handleDelete,
                 setFormUpdate,
                 formUpdate,
-                getProductsAll,
                 setSelectedProducts,
                 selectedProducts,
                 setIsModalOpenDelete,

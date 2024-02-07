@@ -36,7 +36,8 @@ const CategoryContext = ({ children }) => {
         }
 
     }
-
+    
+    //Função cria categoria 
     const handleSubmitCategory = async (data) => {
         try {
 
@@ -50,14 +51,17 @@ const CategoryContext = ({ children }) => {
                 })
             });
             console.log(res)
-            const DataMSG = await res.json();
-            console.log(DataMSG);
 
-            if (res.ok) {
-                setMessage(DataMSG.msg);
-                getCategory();
-            } else {
-                setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
+            if(profile.userType === "Administrador") {
+                const DataMSG = await res.json();
+                 console.log(DataMSG);
+
+                 if (res.ok) {
+                    setMessage(DataMSG.msg);
+                    getCategory();
+                } else {
+                    setMessage(`Erro ao cadastrar categoria: ${DataMSG.msg}`);
+                }
             }
 
 

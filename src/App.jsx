@@ -20,12 +20,12 @@ function App() {
     <>
       {tokenUser && <Navbar />}
       <Routes>
-        <Route path='/' element={!tokenUser && <Login />} />
+        <Route path='/' element={tokenUser ? <Home /> : <Login />} />
         <Route path='/home' element={tokenUser && <Home />} />
         <Route path='/products' element={tokenUser && <AllProducts />} />
         <Route path='/products/register' element={tokenUser && <RegisterProducts />} />
         <Route path='/*' element={tokenUser ? <Home /> : <Login />} />
-        <Route path ='/admin' element={tokenUser && <PanelAdmin />} />
+        <Route path ='/admin' element={tokenUser && profile && profile.userType === "Administrador" && <PanelAdmin />} />
       </Routes>
       <Analytics />
     </>
