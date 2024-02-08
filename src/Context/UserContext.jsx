@@ -9,7 +9,6 @@ const UserContext = createContext('');
 
 const AuthContext = ({ children }) => {
 
-
     const [selectedUser, setSelecteUser] = useState(null);
     const [isModalOpenUser, setIsModalOpenUser] = useState(false)
     const [isModalOpenUserDelete, setIsModalOpenUserDelete] = useState(false)

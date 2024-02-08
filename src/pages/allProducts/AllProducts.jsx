@@ -60,7 +60,7 @@ const AllProducts = () => {
                  <div className='qtdItens'>
                     <select name="itensPagination" id="itensPagination" onChange={(e) => setItensPerPages(Number(e.target.value))} placeholder='10'
                     >
-                    <option value="">Selecione...</option>
+                    <option value={allProduct.length}>Todos</option>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={15}>15</option>

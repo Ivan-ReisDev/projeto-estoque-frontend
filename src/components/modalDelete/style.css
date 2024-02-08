@@ -31,3 +31,8 @@
 .modalDelete  h2 {
     text-transform: uppercase !important;
 }
+
+.ReactModal__Content {
+    height: 250px;
+
+}

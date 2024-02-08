@@ -23,7 +23,16 @@ const ModalCategory = ({ isOpen, onClose }) => {
 
     return (
         <>
-            <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto">
+            <ReactModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detalhes do produto" 
+            style={{
+            overlay: {
+              backgroundColor: 'papayawhip'
+            },
+            content: {
+              color: 'lightsteelblue',
+              height: '300px'
+            }
+          }}>
                 <div className='border-b-2 w-full h-{20%}'>
                     <h2 className=' text-xl m-2 '>Cadastrar nova categoria</h2>
                 </div>

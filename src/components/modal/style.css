@@ -19,7 +19,6 @@
 /*Fundo 2*/
 .ReactModal__Content {
     width: 50%;
-    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;

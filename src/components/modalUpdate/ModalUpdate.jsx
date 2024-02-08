@@ -57,6 +57,15 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
             onRequestClose={onClose}
             contentLabel="Update"
             className="modalUpdate"
+            style={{
+                overlay: {
+                  backgroundColor: 'papayawhip'
+                },
+                content: {
+                  color: 'lightsteelblue',
+                  height: '600px'
+                }
+              }}
         >
             <h2>Atualizar Produto</h2>
             <div className="container_modal container_update">
@@ -131,8 +140,9 @@ const ModalUpdate= ({ isOpen, onClose, reserve, handleUpdateProducts }) => {
                                 type="text"
                                 name="mark"
                                 id="mark"
-                                handleChange={formUpdate.mark}
+                                value={formUpdate.mark}
                                 onChange={handleChange}
+                                
                             />
                             <label htmlFor="price">Preço *</label>
                             <InputNew
